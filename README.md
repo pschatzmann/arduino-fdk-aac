@@ -7,6 +7,10 @@ I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) pro
 
 The Android-targeted implementation of the Fraunhofer AAC encoder uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.
 
+## Copyright
+
+Please read the included [NOTICE](NOTICE).
+
 ## Examples
 
 Examples can be found in the [arduino-audio-tools library](https://github.com/pschatzmann/arduino-audio-tools) 
