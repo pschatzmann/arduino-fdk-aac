@@ -20,6 +20,10 @@ cd  ~/Documents/Arduino/libraries
 git clone pschatzmann/arduino-fdk-aac.git
 ```
 
+## Class Documentation
+
+The [generated class documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/) can be found here.
+
 ## Compile Issues / Supported Architectures
 
 On some processors we get compile errors because the arrays are too big.  
