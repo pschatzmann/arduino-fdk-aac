@@ -91,14 +91,14 @@ class Repository:
     
     # Sets the working directory to the root of the project
     def setupWorkingDirectory(self):
-        if os.getcwd().find("/fdk-aac/")>0:
-            pos = os.getcwd().index("/fdk-aac")
-            newPath = os.getcwd()[0:pos+8]
+        if os.getcwd().find("/arduino-fdk-aac/")>0:
+            pos = os.getcwd().index("/arduino-fdk-aac")
+            newPath = os.getcwd()[0:pos+16]
             print("-> new path: ", newPath)
             os.chdir(newPath)
 
-        if not os.getcwd().endswith("/fdk-aac"):
-            os.chdir("fdk-aac")
+        if not os.getcwd().endswith("/arduino-fdk-aac"):
+            os.chdir("arduino-fdk-aac")
 
         print("Directory: ", os.getcwd())
 

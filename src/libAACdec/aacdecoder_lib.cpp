@@ -957,6 +957,7 @@ LINKSPEC_CPP HANDLE_AACDECODER aacDecoder_Open(TRANSPORT_TYPE transportFmt,
 
   /* Allocate AAC decoder core struct. */
   aacDec = CAacDecoder_Open(transportFmt);
+
   if (aacDec == NULL) {
     transportDec_Close(&pIn);
     goto bail;

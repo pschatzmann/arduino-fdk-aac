@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['initheaderdata_2265',['initHeaderData',['../env__extr_8cpp.html#ad399fccff96bf713878d8f872bd3c53a',1,'initHeaderData(HANDLE_SBR_HEADER_DATA hHeaderData, const int sampleRateIn, const int sampleRateOut, const INT downscaleFactor, const int samplesPerFrame, const UINT flags, const int setDefaultHdr):&#160;env_extr.cpp'],['../env__extr_8h.html#ad399fccff96bf713878d8f872bd3c53a',1,'initHeaderData(HANDLE_SBR_HEADER_DATA hHeaderData, const int sampleRateIn, const int sampleRateOut, const INT downscaleFactor, const int samplesPerFrame, const UINT flags, const int setDefaultHdr):&#160;env_extr.cpp']]],
+  ['initsbrprevframedata_2266',['initSbrPrevFrameData',['../env__extr_8cpp.html#a08ce0b9b82b24d120c26393e8244a053',1,'initSbrPrevFrameData(HANDLE_SBR_PREV_FRAME_DATA h_prev_data, int timeSlots):&#160;env_extr.cpp'],['../env__extr_8h.html#a08ce0b9b82b24d120c26393e8244a053',1,'initSbrPrevFrameData(HANDLE_SBR_PREV_FRAME_DATA h_prev_data, int timeSlots):&#160;env_extr.cpp']]],
+  ['initslotbasedrotation_2267',['initSlotBasedRotation',['../psdec_8cpp.html#af7d799764593b72342de1bfb3c6cb5f0',1,'initSlotBasedRotation(HANDLE_PS_DEC h_ps_d, int env, int usb):&#160;psdec.cpp'],['../psdec_8h.html#af7d799764593b72342de1bfb3c6cb5f0',1,'initSlotBasedRotation(HANDLE_PS_DEC h_ps_d, int env, int usb):&#160;psdec.cpp']]],
+  ['is_5flittle_5fendian_2268',['IS_LITTLE_ENDIAN',['../generic_stds_8h.html#a89a8cf38b3b38d864a5ea6aa6abe73e2',1,'genericStds.cpp']]]
+];
