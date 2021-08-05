@@ -106,19 +106,19 @@ amm-info@iis.fraunhofer.de
 #include "libFDK/FDK_archdef.h"
 #include "libSYS/machine_type.h"
 
-#if defined(__arm__)
-#include "arm/fixmul_arm.h"
+// #if defined(__arm__)
+// #include "arm/fixmul_arm.h"
 
-#elif defined(__mips__)
-#include "mips/fixmul_mips.h"
+// #elif defined(__mips__)
+// #include "mips/fixmul_mips.h"
 
-#elif defined(__x86__)
-#include "x86/fixmul_x86.h"
+// #elif defined(__x86__)
+// #include "x86/fixmul_x86.h"
 
-#elif defined(__powerpc__)
-#include "ppc/fixmul_ppc.h"
+// #elif defined(__powerpc__)
+// #include "ppc/fixmul_ppc.h"
 
-#endif /* all cores */
+// #endif /* all cores */
 
 /*************************************************************************
  *************************************************************************

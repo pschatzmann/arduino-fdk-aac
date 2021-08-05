@@ -106,19 +106,19 @@ amm-info@iis.fraunhofer.de
 #include "libFDK/FDK_archdef.h"
 #include "libSYS/machine_type.h"
 
-#if defined(__arm__)
-#include "arm/clz_arm.h"
+// #if defined(__arm__)
+// #include "arm/clz_arm.h"
 
-#elif defined(__mips__)
-#include "mips/clz_mips.h"
+// #elif defined(__mips__)
+// #include "mips/clz_mips.h"
 
-#elif defined(__x86__)
-#include "x86/clz_x86.h"
+// #elif defined(__x86__)
+// #include "x86/clz_x86.h"
 
-#elif defined(__powerpc__)
-#include "ppc/clz_ppc.h"
+// #elif defined(__powerpc__)
+// #include "ppc/clz_ppc.h"
 
-#endif /* all cores */
+// #endif /* all cores */
 
 /*************************************************************************
  *************************************************************************

@@ -154,9 +154,9 @@ extern const FIXP_DBL invSqrtTab[SQRT_VALUES];
  * Hardware specific implementations
  */
 
-#if defined(__x86__)
-#include "x86/fixpoint_math_x86.h"
-#endif /* target architecture selector */
+// #if defined(__x86__)
+// #include "x86/fixpoint_math_x86.h"
+// #endif /* target architecture selector */
 
 /*
  * Fallback implementations

@@ -100,16 +100,16 @@ amm-info@iis.fraunhofer.de
 
 *******************************************************************************/
 
-#if !defined(ABS_H)
-#define ABS_H
+ #if !defined(ABS_H)
+ #define ABS_H
 
-#if defined(__mips__)
-#include "mips/abs_mips.h"
+// #if defined(__mips__)
+// #include "mips/abs_mips.h"
 
-#elif defined(__x86__)
-#include "x86/abs_x86.h"
+// #elif defined(__x86__)
+// #include "x86/abs_x86.h"
 
-#endif /* all cores */
+// #endif /* all cores */
 
 /*************************************************************************
  *************************************************************************
