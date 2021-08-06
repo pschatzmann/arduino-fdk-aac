@@ -107,10 +107,10 @@ amm-info@iis.fraunhofer.de
 #include "libSYS/machine_type.h"
 #include "libFDK/fixmul.h"
 
-#if defined(__arm__)
-#include "arm/fixmadd_arm.h"
+// #if defined(__arm__)
+// #include "arm/fixmadd_arm.h"
 
-#endif /* all cores */
+// #endif /* all cores */
 
 /*************************************************************************
  *************************************************************************

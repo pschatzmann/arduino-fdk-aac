@@ -117,9 +117,9 @@ amm-info@iis.fraunhofer.de
 #include "libAACdec/aacdec_hcr.h"
 #include "libAACdec/rvlc.h"
 
-#if defined(__arm__)
-#include "arm/block_arm.cpp"
-#endif
+// #if defined(__arm__)
+// #include "arm/block_arm.cpp"
+// #endif
 
 /*!
   \brief Read escape sequence of codeword

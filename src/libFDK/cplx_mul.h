@@ -105,13 +105,13 @@ amm-info@iis.fraunhofer.de
 
 #include "libFDK/common_fix.h"
 
-#if defined(__arm__) || defined(_M_ARM)
-#include "arm/cplx_mul_arm.h"
+// #if defined(__arm__) || defined(_M_ARM)
+// #include "arm/cplx_mul_arm.h"
 
-#elif defined(__GNUC__) && defined(__mips__) && __mips_isa_rev < 6
-#include "mips/cplx_mul_mips.h"
+// #elif defined(__GNUC__) && defined(__mips__) && __mips_isa_rev < 6
+// #include "mips/cplx_mul_mips.h"
 
-#endif /* #if defined all cores: bfin, arm, etc. */
+// #endif /* #if defined all cores: bfin, arm, etc. */
 
 /* #############################################################################
  */

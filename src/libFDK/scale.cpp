@@ -110,13 +110,13 @@ amm-info@iis.fraunhofer.de
 
 #include "libFDK/scale.h"
 
-#if defined(__mips__)
-#include "mips/scale_mips.cpp"
+// #if defined(__mips__)
+// #include "mips/scale_mips.cpp"
 
-#elif defined(__arm__)
-#include "arm/scale_arm.cpp"
+// #elif defined(__arm__)
+// #include "arm/scale_arm.cpp"
 
-#endif
+// #endif
 
 #ifndef FUNCTION_scaleValues_SGL
 /*!

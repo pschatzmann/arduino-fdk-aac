@@ -105,13 +105,13 @@ amm-info@iis.fraunhofer.de
 
 #include "libFDK/common_fix.h"
 
-#if defined(__arm__)
-#include "arm/scramble_arm.h"
+// #if defined(__arm__)
+// #include "arm/scramble_arm.h"
 
-#elif defined(__mips__) && defined(__mips_dsp) && !defined(__mips16)
-#include "mips/scramble_mips.h"
+// #elif defined(__mips__) && defined(__mips_dsp) && !defined(__mips16)
+// #include "mips/scramble_mips.h"
 
-#endif
+// #endif
 
 /*****************************************************************************
 

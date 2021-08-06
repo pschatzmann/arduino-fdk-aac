@@ -166,9 +166,9 @@ amm-info@iis.fraunhofer.de
 #define __ARM_ARCH_8__
 #endif
 
-#ifdef _M_ARM
-#include "armintr.h"
-#endif
+// #ifdef _M_ARM
+// #include "armintr.h"
+// #endif
 
 /* Define preferred Multiplication type */
 

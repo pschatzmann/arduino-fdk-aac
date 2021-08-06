@@ -109,13 +109,13 @@ amm-info@iis.fraunhofer.de
 
 #define SCALE_INLINE
 
-#if defined(__arm__)
-#include "arm/scale_arm.h"
+// #if defined(__arm__)
+// #include "arm/scale_arm.h"
 
-#elif defined(__mips__)
-#include "mips/scale_mips.h"
+// #elif defined(__mips__)
+// #include "mips/scale_mips.h"
 
-#endif
+// #endif
 
 void scaleValues(FIXP_SGL *vector, INT len, INT scalefactor);
 void scaleValues(FIXP_DBL *vector, INT len, INT scalefactor);

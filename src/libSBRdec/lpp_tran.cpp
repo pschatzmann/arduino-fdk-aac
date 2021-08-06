@@ -132,9 +132,9 @@ amm-info@iis.fraunhofer.de
 
 #include "libSBRdec/HFgen_preFlat.h"
 
-#if defined(__arm__)
-#include "arm/lpp_tran_arm.cpp"
-#endif
+// #if defined(__arm__)
+// #include "arm/lpp_tran_arm.cpp"
+// #endif
 
 #define LPC_SCALE_FACTOR 2
 
