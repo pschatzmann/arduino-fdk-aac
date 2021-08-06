@@ -70,10 +70,6 @@ void setup() {
     info.channels = 1;
     info.sample_rate = 10000;
     aac.begin(info);
-
-    Serial.println("writing...");
-    aac.end();    
-
 }
 
 void loop() {

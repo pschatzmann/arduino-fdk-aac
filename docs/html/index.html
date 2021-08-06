@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>fdk-aac: Introduction</title>
+<title>Arduino FDK AAC Encoder and Decoder Library: Arduino AAC Encoding and Decoding Library</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">fdk-aac
+   <div id="projectname">Arduino FDK AAC Encoder and Decoder Library
    </div>
   </td>
  </tr>
@@ -62,25 +62,94 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Introduction </div>  </div>
+<div class="title">Arduino AAC Encoding and Decoding Library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="Scope"></a>
-Scope</h1>
-<p>This document describes the high-level interface and usage of the ISO/MPEG-2/4 AAC Encoder library developed by the Fraunhofer Institute for Integrated Circuits (IIS).</p>
-<p>The library implements encoding on the basis of the MPEG-2 and MPEG-4 AAC Low-Complexity standard, and depending on the library's configuration, MPEG-4 High-Efficiency AAC v2 and/or AAC-ELD standard.</p>
-<p>All references to SBR (Spectral Band Replication) are only applicable to HE-AAC or AAC-ELD versions of the library. All references to PS (Parametric Stereo) are only applicable to HE-AAC v2 versions of the library.</p>
-<h1><a class="anchor" id="encBasics"></a>
-Encoder Basics</h1>
-<p>This document can only give a rough overview about the ISO/MPEG-2 and ISO/MPEG-4 AAC audio coding standard. To understand all the terms in this document, you are encouraged to read the following documents.</p>
-<ul>
-<li>ISO/IEC 13818-7 (MPEG-2 AAC), which defines the syntax of MPEG-2 AAC audio bitstreams.</li>
-<li>ISO/IEC 14496-3 (MPEG-4 AAC, subparts 1 and 4), which defines the syntax of MPEG-4 AAC audio bitstreams.</li>
-<li>Lutzky, Schuller, Gayer, Kr&auml;mer, Wabnik, "A guideline to audio codec
-delay", 116th AES Convention, May 8, 2004</li>
-</ul>
-<p>MPEG Advanced Audio Coding is based on a time-to-frequency mapping of the signal. The signal is partitioned into overlapping portions and transformed into frequency domain. The spectral components are then quantized and coded. <br  />
- An MPEG-2 or MPEG-4 AAC audio bitstream is composed of frames. Contrary to MPEG-1/2 Layer-3 (mp3), the length of individual frames is not restricted to a fixed number of bytes, but can take on any length between 1 and 768 bytes. </p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> I was looking for a way to encode sound PCM data to the AAC or MPEG data format on some Arduino Devices. That's when I found the <a href="https://en.wikipedia.org/wiki/Fraunhofer_FDK_AAC">Fraunhofer FDK AAC library</a>.</p>
+<p>The Android-targeted implementation of the Fraunhofer AAC can be used for encoding and decoding, uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.</p>
+<p>I have forked the <a href="https://github.com/mstorsjo/fdk-aac/tree/v2.0.1">fdk-aac</a> project, converted it to an Arduino library and provided a simple Arduino friendly API. The only caveat is, that I have removed all optimized processor specific code (e.g. for ARM, 386 and mips), so that it will compile with the same code on all environements.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Decoding Example</h1>
+<div class="fragment"><div class="line">#include &quot;AACDecoderFDK.h&quot;</div>
+<div class="line">#include &quot;BabyElephantWalk60_aac.h&quot;</div>
+<div class="line"> </div>
+<div class="line">using namespace aac_fdk;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">void dataCallback(CStreamInfo &amp;info, INT_PCM *pcm_data, size_t len) {</div>
+<div class="line">    int channels = info.numChannels;</div>
+<div class="line">    for (size_t i=0; i&lt;len; i+=channels){</div>
+<div class="line">        for (int j=0;j&lt;channels;j++){</div>
+<div class="line">            Serial.print(pcm_data[i+j]);</div>
+<div class="line">            Serial.print(&quot; &quot;);</div>
+<div class="line">        }</div>
+<div class="line">        Serial.println();</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">AACDecoderFDK aac(dataCallback);</div>
+<div class="line"> </div>
+<div class="line">void setup() {</div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line">    aac.begin();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void loop() {</div>
+<div class="line">    Serial.println(&quot;writing...&quot;);</div>
+<div class="line">    aac.write(BabyElephantWalk60_aac, BabyElephantWalk60_aac_len);    </div>
+<div class="line"> </div>
+<div class="line">    // restart from the beginning</div>
+<div class="line">    delay(2000);</div>
+<div class="line">    aac.begin();</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+Encoding Example</h1>
+<div class="fragment"><div class="line">#include &quot;AACEncoderFDK.h&quot;</div>
+<div class="line">#include &lt;stdlib.h&gt;     /* srand, rand */</div>
+<div class="line"> </div>
+<div class="line">using namespace aac_fdk;</div>
+<div class="line"> </div>
+<div class="line">void dataCallback(uint8_t *aac_data, size_t len) {</div>
+<div class="line">    Serial.print(&quot;AAC generated with &quot;);</div>
+<div class="line">    Serial.print(len);</div>
+<div class="line">    Serial.println(&quot; bytes&quot;);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">AACEncoderFDK aac(dataCallback);</div>
+<div class="line">AudioInfo info;</div>
+<div class="line">int16_t buffer[512];</div>
+<div class="line"> </div>
+<div class="line">void setup() {</div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    info.channels = 1;</div>
+<div class="line">    info.sample_rate = 10000;</div>
+<div class="line">    aac.begin(info);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void loop() {</div>
+<div class="line">    Serial.println(&quot;writing 512 samples of random data&quot;);</div>
+<div class="line">    for (int j=0;j&lt;512;j++){</div>
+<div class="line">        buffer[j] = (rand() % 100) - 50;         </div>
+<div class="line">    }</div>
+<div class="line">    aac.write(buffer, 512);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+Installation</h1>
+<p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
+<div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
+<div class="line">git clone pschatzmann/arduino-fdk-aac.git</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+Class Documentation</h1>
+<p>The <a href="https://pschatzmann.github.io/arduino-fdk-aac/html/">generated class documentation</a> can be found here.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Compile Issues / Supported Architectures</h1>
+<p>On some processors we get compile errors because the arrays are too big. <br  />
+ Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file.</p>
+<p>All examples have been written and tested on a ESP32. The basic funcationality of the encoder and decoder however should work on all Arduino Devices and is independent from the processor.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Copyright</h1>
+<p>Please read the included [NOTICE](NOTICE). </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

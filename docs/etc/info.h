@@ -1,6 +1,9 @@
 /**
  * Transport type identifiers.
  */
+
+namespace aac_fdk {
+
 typedef enum {
   TT_UNKNOWN = -1, /**< Unknown format.            */
   TT_MP4_RAW = 0,  /**< "as is" access units (packet based since there is
@@ -17,3 +20,5 @@ typedef enum {
   TT_DRM = 12 /**< Digital Radio Mondial (DRM30/DRM+) bitstream format. */
 
 } TRANSPORT_TYPE;
+
+}
