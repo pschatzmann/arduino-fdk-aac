@@ -3,17 +3,89 @@
 
 I was looking for a way to encode sound PCM data to the AAC or MPEG data format on some Arduino Devices. That's when I found  the [Fraunhofer FDK AAC library](https://en.wikipedia.org/wiki/Fraunhofer_FDK_AAC). 
 
-I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project and converted it to an Arduino library. 
+The Android-targeted implementation of the Fraunhofer AAC can be used for encoding and decoding, uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.
 
-The Android-targeted implementation of the Fraunhofer AAC encoder uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.
+I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project,  converted it to an Arduino library and provided a simple Arduino friendly API.
 
-## Copyright
 
-Please read the included [NOTICE](NOTICE).
+## Decoding Example
 
-## Examples
+```
+#include "AACDecoderFDK.h"
+#include "BabyElephantWalk60_aac.h"
 
-Examples can be found in the [arduino-audio-tools library](https://github.com/pschatzmann/arduino-audio-tools) 
+using namespace aac_fdk;
+
+
+void dataCallback(CStreamInfo &info, INT_PCM *pcm_data, size_t len) {
+    int channels = info.numChannels;
+    for (size_t i=0; i<len; i+=channels){
+        for (int j=0;j<channels;j++){
+            Serial.print(pcm_data[i+j]);
+            Serial.print(" ");
+        }
+        Serial.println();
+    }
+}
+
+AACDecoderFDK aac(dataCallback);
+
+void setup() {
+    Serial.begin(115200);
+    aac.begin();
+}
+
+void loop() {
+    Serial.println("writing...");
+    aac.write(BabyElephantWalk60_aac, BabyElephantWalk60_aac_len);    
+
+    // restart from the beginning
+    delay(2000);
+    aac.begin();
+}
+
+```
+
+## Encoding Example
+
+```
+#include "AACEncoderFDK.h"
+#include <stdlib.h>     /* srand, rand */
+
+using namespace aac_fdk;
+
+void dataCallback(uint8_t *aac_data, size_t len) {
+    Serial.print("AAC generated with ");
+    Serial.print(len);
+    Serial.println(" bytes");
+}
+
+AACEncoderFDK aac(dataCallback);
+AudioInfo info;
+int16_t buffer[512];
+
+void setup() {
+    Serial.begin(115200);
+
+    info.channels = 1;
+    info.sample_rate = 10000;
+    aac.begin(info);
+
+    Serial.println("writing...");
+    aac.end();    
+
+}
+
+void loop() {
+    Serial.println("writing 512 samples of random data");
+    for (int j=0;j<512;j++){
+        buffer[j] = (rand() % 100) - 50;         
+    }
+    aac.write(buffer, 512);
+}
+
+```
+
 
 ## Installation
 
@@ -35,3 +107,6 @@ Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file
 
 All examples have been written and tested on a ESP32. The basic funcationality of the encoder and decoder however should work on all Arduino Devices and is independent from the processor.
 
+## Copyright
+
+Please read the included [NOTICE](NOTICE).

@@ -19,4 +19,5 @@ add_library (fdk_aac ${SRC_LIST_CPP})
 target_include_directories(fdk_aac PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src )
 
 # build examples
-#add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/decode")
+add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/decode")
+add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/encode")
