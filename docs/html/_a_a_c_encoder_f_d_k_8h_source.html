@@ -141,262 +141,263 @@ $(function() {
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        this-&gt;out_size = outbuf_size;</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">  145</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(<a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a>  from) {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        this-&gt;channels = from.channels;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        this-&gt;sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        this-&gt;bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        setup();</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">  159</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">begin</a>(<a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a>  info) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(info);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">  172</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">begin</a>(<span class="keywordtype">int</span> input_channels, <span class="keywordtype">int</span> input_sample_rate, <span class="keywordtype">int</span> input_bits_per_sample) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a> ai;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        ai.channels = input_channels;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        ai.sample_rate = input_sample_rate;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        ai.bits_per_sample = input_bits_per_sample;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(ai);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">  150</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">begin</a>(<a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a>  info) {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(info);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">  163</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">begin</a>(<span class="keywordtype">int</span> input_channels, <span class="keywordtype">int</span> input_sample_rate, <span class="keywordtype">int</span> input_bits_per_sample) {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a> ai;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        ai.channels = input_channels;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        ai.sample_rate = input_sample_rate;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        ai.bits_per_sample = input_bits_per_sample;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(ai);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="comment">// convert PCM data to AAC - size in bytes</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    int32_t write(<span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">int</span> in_size){</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        LOG(Debug,<span class="stringliteral">&quot;write %d bytes&quot;</span>, in_size);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">if</span> (input_buf==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            LOG(Error,<span class="stringliteral">&quot;The encoder is not open\n&quot;</span>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        in_elem_size = 2;</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="comment">// convert PCM data to AAC - size in bytes</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    int32_t write(<span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">int</span> in_size){</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        LOG(Debug,<span class="stringliteral">&quot;write %d bytes&quot;</span>, in_size);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">if</span> (input_buf==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            LOG(Error,<span class="stringliteral">&quot;The encoder is not open\n&quot;</span>);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        in_elem_size = 2;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        in_args.numInSamples = in_size &lt;= 0 ? -1 : in_size / 2;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        in_buf.numBufs = 1;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        in_buf.bufs = &amp;in_ptr;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        in_buf.bufferIdentifiers = &amp;in_identifier;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        in_buf.bufSizes = &amp;in_size;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        in_buf.bufElSizes = &amp;in_elem_size;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        out_ptr = outbuf;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        out_elem_size = 1;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        out_buf.numBufs = 1;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        out_buf.bufs = &amp;out_ptr;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        out_buf.bufferIdentifiers = &amp;out_identifier;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        out_buf.bufSizes = &amp;out_size;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        out_buf.bufElSizes = &amp;out_elem_size;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">if</span> ((err = aacEncEncode(handle, &amp;in_buf, &amp;out_buf, &amp;in_args, &amp;out_args)) != AACENC_OK) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="comment">// error</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">if</span> (err != AACENC_ENCODE_EOF) {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Encoding failed\n&quot;</span>);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        }</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="comment">// output to Arduino Stream </span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">provideResult</a>((uint8_t*)outbuf, out_args.numOutBytes);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">return</span> in_size;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="comment">// release resources</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">void</span> end(){</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keywordflow">if</span> (input_buf!=<span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keyword">delete</span> []input_buf;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        input_buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        in_args.numInSamples = in_size &lt;= 0 ? -1 : in_size / 2;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        in_buf.numBufs = 1;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        in_buf.bufs = &amp;in_ptr;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        in_buf.bufferIdentifiers = &amp;in_identifier;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        in_buf.bufSizes = &amp;in_size;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        in_buf.bufElSizes = &amp;in_elem_size;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        out_ptr = outbuf;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        out_elem_size = 1;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        out_buf.numBufs = 1;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        out_buf.bufs = &amp;out_ptr;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        out_buf.bufferIdentifiers = &amp;out_identifier;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        out_buf.bufSizes = &amp;out_size;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        out_buf.bufElSizes = &amp;out_elem_size;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">if</span> ((err = aacEncEncode(handle, &amp;in_buf, &amp;out_buf, &amp;in_args, &amp;out_args)) != AACENC_OK) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="comment">// error</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            <span class="keywordflow">if</span> (err != AACENC_ENCODE_EOF) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Encoding failed\n&quot;</span>);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="comment">// output to Arduino Stream </span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">provideResult</a>((uint8_t*)outbuf, out_args.numOutBytes);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> in_size;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="comment">// release resources</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordtype">void</span> end(){</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="keywordflow">if</span> (input_buf!=<span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keyword">delete</span> []input_buf;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        input_buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keywordflow">if</span> (convert_buf!=<span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keyword">delete</span> []convert_buf;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        convert_buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">if</span> (outbuf!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keyword">delete</span> []outbuf;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        outbuf=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> (convert_buf!=<span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keyword">delete</span> []convert_buf;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        convert_buf = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">if</span> (outbuf!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keyword">delete</span> []outbuf;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        }</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        outbuf=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        aacEncClose(&amp;handle);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    UINT getParameter(<span class="keyword">const</span> AACENC_PARAM param) {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="keywordflow">return</span> aacEncoder_GetParam(handle, param);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">int</span> setParameter(AACENC_PARAM param, uint32_t value){</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keywordflow">return</span> aacEncoder_SetParam(handle, param, value);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="comment">// common variables</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">int</span> vbr = 0;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">int</span> bitrate = 64000;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">int</span> ch = 0;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *infile;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordtype">void</span> *wav;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">int</span> format, sample_rate, channels, bits_per_sample;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">int</span> input_size;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    uint8_t* input_buf = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    int16_t* convert_buf = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">int</span> aot = 2;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">bool</span> afterburner = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">int</span> eld_sbr = 0;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    HANDLE_AACENCODER handle;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    CHANNEL_MODE mode;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    AACENC_InfoStruct info = { 0 };</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="comment">// loop variables</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    AACENC_BufDesc in_buf = { 0 }, out_buf = { 0 };</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    AACENC_InArgs in_args = { 0 };</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    AACENC_OutArgs out_args = { 0 };</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">int</span> in_identifier = IN_AUDIO_DATA;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordtype">int</span> in_elem_size;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordtype">int</span> out_identifier = OUT_BITSTREAM_DATA;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">int</span> out_elem_size;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">void</span> *in_ptr, *out_ptr;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    uint8_t* outbuf;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">int</span> out_size = 20480;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    AACENC_ERROR err;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordtype">bool</span> active;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    AACCallbackFDK aacCallback=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    Stream *out;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        aacEncClose(&amp;handle);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    UINT getParameter(<span class="keyword">const</span> AACENC_PARAM param) {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">return</span> aacEncoder_GetParam(handle, param);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">int</span> setParameter(AACENC_PARAM param, uint32_t value){</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordflow">return</span> aacEncoder_SetParam(handle, param, value);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    }</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="comment">// common variables</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordtype">int</span> vbr = 0;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordtype">int</span> bitrate = 64000;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">int</span> ch = 0;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *infile;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">void</span> *wav;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">int</span> format, sample_rate, channels, bits_per_sample;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">int</span> input_size;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    uint8_t* input_buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    int16_t* convert_buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">int</span> aot = 2;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">bool</span> afterburner = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">int</span> eld_sbr = 0;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    HANDLE_AACENCODER handle;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    CHANNEL_MODE mode;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    AACENC_InfoStruct info = { 0 };</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="comment">// loop variables</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    AACENC_BufDesc in_buf = { 0 }, out_buf = { 0 };</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    AACENC_InArgs in_args = { 0 };</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    AACENC_OutArgs out_args = { 0 };</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">int</span> in_identifier = IN_AUDIO_DATA;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">int</span> in_elem_size;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">int</span> out_identifier = OUT_BITSTREAM_DATA;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">int</span> out_elem_size;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">void</span> *in_ptr, *out_ptr;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    uint8_t* outbuf;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">int</span> out_size = 20480;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    AACENC_ERROR err;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">bool</span> active;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    AACCallbackFDK aacCallback=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    Stream *out;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">  274</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">setAudioInfo</a>(<a class="code" href="structaac__fdk_1_1_audio_info.html">AudioInfo</a>  from) {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        this-&gt;channels = from.channels;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        this-&gt;sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        this-&gt;bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        setup();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="comment">// starts the processing</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordtype">void</span> setup() {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keywordflow">switch</span> (channels) {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">case</span> 1: mode = MODE_1;       <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">case</span> 2: mode = MODE_2;       <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">case</span> 3: mode = MODE_1_2;     <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">case</span> 4: mode = MODE_1_2_1;   <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">case</span> 5: mode = MODE_1_2_2;   <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">case</span> 6: mode = MODE_1_2_2_1; <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unsupported WAV channels\n&quot;</span>);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        }</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordflow">if</span> (aacEncOpen(&amp;handle, 0, channels) != AACENC_OK) {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to open encoder\n&quot;</span>);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">if</span> (updateParams()&lt;0) {</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to update parameters\n&quot;</span>);</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        }</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keywordflow">if</span> (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to initialize the encoder\n&quot;</span>);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        }</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">if</span> (aacEncInfo(handle, &amp;info) != AACENC_OK) {</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to get the encoder info\n&quot;</span>);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        input_size = channels*2*info.frameLength;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        input_buf = <span class="keyword">new</span> uint8_t[input_size];</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">if</span> (input_buf==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for input buffer\n&quot;</span>);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        convert_buf = <span class="keyword">new</span> int16_t[input_size];</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">if</span> (convert_buf==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for convert buffer\n&quot;</span>);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        }</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        outbuf = <span class="keyword">new</span> uint8_t[out_size];</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        <span class="keywordflow">if</span> (outbuf==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for output buffer\n&quot;</span>);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        }</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    }</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordtype">int</span> updateParams() {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        LOG(Debug,__FUNCTION__);</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_AOT, aot) != AACENC_OK) {</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the AOT\n&quot;</span>);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        }</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">if</span> (aot == 39 &amp;&amp; eld_sbr) {</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_SBR_MODE, 1) != AACENC_OK) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set SBR mode for ELD\n&quot;</span>);</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            }</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_SAMPLERATE, sample_rate) != AACENC_OK) {</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the AACENC_SAMPLERATE\n&quot;</span>);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        }</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_CHANNELMODE, mode) != AACENC_OK) {</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the channel mode\n&quot;</span>);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_CHANNELORDER, 1) != AACENC_OK) {</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the wav channel order\n&quot;</span>);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        }</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keywordflow">if</span> (vbr) {</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_BITRATEMODE, vbr) != AACENC_OK) {</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set the VBR bitrate mode\n&quot;</span>);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            }</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set the bitrate\n&quot;</span>);</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        }</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_TRANSMUX, <a class="code" href="namespaceaac__fdk.html#a2778be91ce5b9583922e12ed14800ab7a4dcca5bcc4b82568da4a32aaf231966b">TT_MP4_ADTS</a>) != AACENC_OK) {</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the ADTS transmux\n&quot;</span>);</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_AFTERBURNER, afterburner) != AACENC_OK) {</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the afterburner mode\n&quot;</span>);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">  387</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">provideResult</a>(uint8_t *data, <span class="keywordtype">size_t</span> len){</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        <span class="keywordflow">if</span> (len&gt;0){</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            LOG(Debug, <span class="stringliteral">&quot;provideResult: %zu samples&quot;</span>,len);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            <span class="comment">// provide result</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            <span class="keywordflow">if</span>(aacCallback!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                <span class="comment">// output via callback</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                aacCallback(data, len);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            } </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            <span class="keywordflow">if</span> (out!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                out-&gt;write((uint8_t*)pwm_buffer, data, len*<span class="keyword">sizeof</span>(INT_PCM));</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            }</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        }</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }    </div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;};</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;}</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="comment">// starts the processing</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordtype">void</span> setup() {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">switch</span> (channels) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordflow">case</span> 1: mode = MODE_1;       <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keywordflow">case</span> 2: mode = MODE_2;       <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">case</span> 3: mode = MODE_1_2;     <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">case</span> 4: mode = MODE_1_2_1;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">case</span> 5: mode = MODE_1_2_2;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">case</span> 6: mode = MODE_1_2_2_1; <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unsupported WAV channels\n&quot;</span>);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        }</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">if</span> (aacEncOpen(&amp;handle, 0, channels) != AACENC_OK) {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to open encoder\n&quot;</span>);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keywordflow">if</span> (updateParams()&lt;0) {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to update parameters\n&quot;</span>);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        }</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">if</span> (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to initialize the encoder\n&quot;</span>);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordflow">if</span> (aacEncInfo(handle, &amp;info) != AACENC_OK) {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to get the encoder info\n&quot;</span>);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        input_size = channels*2*info.frameLength;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        input_buf = <span class="keyword">new</span> uint8_t[input_size];</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">if</span> (input_buf==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for input buffer\n&quot;</span>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        convert_buf = <span class="keyword">new</span> int16_t[input_size];</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordflow">if</span> (convert_buf==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for convert buffer\n&quot;</span>);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        outbuf = <span class="keyword">new</span> uint8_t[out_size];</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">if</span> (outbuf==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to allocate memory for output buffer\n&quot;</span>);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordtype">int</span> updateParams() {</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        LOG(Debug,__FUNCTION__);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_AOT, aot) != AACENC_OK) {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the AOT\n&quot;</span>);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">if</span> (aot == 39 &amp;&amp; eld_sbr) {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_SBR_MODE, 1) != AACENC_OK) {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set SBR mode for ELD\n&quot;</span>);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        }</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_SAMPLERATE, sample_rate) != AACENC_OK) {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the AACENC_SAMPLERATE\n&quot;</span>);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        }</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_CHANNELMODE, mode) != AACENC_OK) {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the channel mode\n&quot;</span>);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_CHANNELORDER, 1) != AACENC_OK) {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the wav channel order\n&quot;</span>);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="keywordflow">if</span> (vbr) {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_BITRATEMODE, vbr) != AACENC_OK) {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set the VBR bitrate mode\n&quot;</span>);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            }</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordflow">if</span> (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                LOG(Error,<span class="stringliteral">&quot;Unable to set the bitrate\n&quot;</span>);</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            }</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_TRANSMUX, <a class="code" href="namespaceaac__fdk.html#a2778be91ce5b9583922e12ed14800ab7a4dcca5bcc4b82568da4a32aaf231966b">TT_MP4_ADTS</a>) != AACENC_OK) {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the ADTS transmux\n&quot;</span>);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        <span class="keywordflow">if</span> (setParameter(AACENC_AFTERBURNER, afterburner) != AACENC_OK) {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            LOG(Error,<span class="stringliteral">&quot;Unable to set the afterburner mode\n&quot;</span>);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">  388</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">provideResult</a>(uint8_t *data, <span class="keywordtype">size_t</span> len){</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">if</span> (len&gt;0){</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            LOG(Debug, <span class="stringliteral">&quot;provideResult: %zu samples&quot;</span>,len);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            <span class="comment">// provide result</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="keywordflow">if</span>(aacCallback!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                <span class="comment">// output via callback</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                aacCallback(data, len);</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            } </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            <span class="keywordflow">if</span> (out!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                out-&gt;write((uint8_t*)pwm_buffer, data, len*<span class="keyword">sizeof</span>(INT_PCM));</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            }</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }    </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;};</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;}</div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html">aac_fdk::AACEncoderFDK</a></div><div class="ttdoc">Encodes PCM data to the AAC format and writes the result to a stream.</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:26</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a10cff2a286db5f53e351bd7066be61a2"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a10cff2a286db5f53e351bd7066be61a2">aac_fdk::AACEncoderFDK::setOutputBufferSize</a></div><div class="ttdeci">virtual void setOutputBufferSize(int outbuf_size)</div><div class="ttdoc">Set the Output Buffer Size object.</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:140</div></div>
-<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a16cfdfaf36dd5aaee3fe25b91319f00a"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">aac_fdk::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(AudioInfo info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:159</div></div>
-<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a2488de07983d7894e865ed4b5d5a1ce1"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">aac_fdk::AACEncoderFDK::provideResult</a></div><div class="ttdeci">void provideResult(uint8_t *data, size_t len)</div><div class="ttdoc">return the result PWM data</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:387</div></div>
-<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a2d3c09b71601c69c00779ef98e285199"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">aac_fdk::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(int input_channels, int input_sample_rate, int input_bits_per_sample)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:172</div></div>
+<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a16cfdfaf36dd5aaee3fe25b91319f00a"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a16cfdfaf36dd5aaee3fe25b91319f00a">aac_fdk::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(AudioInfo info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:150</div></div>
+<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a2488de07983d7894e865ed4b5d5a1ce1"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2488de07983d7894e865ed4b5d5a1ce1">aac_fdk::AACEncoderFDK::provideResult</a></div><div class="ttdeci">void provideResult(uint8_t *data, size_t len)</div><div class="ttdoc">return the result PWM data</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:388</div></div>
+<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a2d3c09b71601c69c00779ef98e285199"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a2d3c09b71601c69c00779ef98e285199">aac_fdk::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(int input_channels, int input_sample_rate, int input_bits_per_sample)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:163</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a4de21579d1ca245fc8e6bb4a08c33eee"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a4de21579d1ca245fc8e6bb4a08c33eee">aac_fdk::AACEncoderFDK::~AACEncoderFDK</a></div><div class="ttdeci">~AACEncoderFDK()</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:50</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a5a246cff36f1ad43afc79dea1be1253d"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a5a246cff36f1ad43afc79dea1be1253d">aac_fdk::AACEncoderFDK::setAudioObjectType</a></div><div class="ttdeci">virtual void setAudioObjectType(int aot)</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:84</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a614c1684283617debe622da430e9484e"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a614c1684283617debe622da430e9484e">aac_fdk::AACEncoderFDK::setBitrate</a></div><div class="ttdeci">virtual void setBitrate(int bitrate)</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:59</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a8c989af6a44f92665140ae5c5fac4d9d"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a8c989af6a44f92665140ae5c5fac4d9d">aac_fdk::AACEncoderFDK::setAfterburner</a></div><div class="ttdeci">virtual void setAfterburner(bool afterburner)</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:99</div></div>
-<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a9ccf9038c864606e0a6cf2bb51394b4b"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">aac_fdk::AACEncoderFDK::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:145</div></div>
+<div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_a9ccf9038c864606e0a6cf2bb51394b4b"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9ccf9038c864606e0a6cf2bb51394b4b">aac_fdk::AACEncoderFDK::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:274</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_ad22c3d990fba5fd6b7c55d0e8153a2f9"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#ad22c3d990fba5fd6b7c55d0e8153a2f9">aac_fdk::AACEncoderFDK::setSpecialBandReplication</a></div><div class="ttdeci">virtual void setSpecialBandReplication(int eld_sbr)</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:109</div></div>
 <div class="ttc" id="aclassaac__fdk_1_1_a_a_c_encoder_f_d_k_html_afca1e373837585b1dd2931abfe34291e"><div class="ttname"><a href="classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#afca1e373837585b1dd2931abfe34291e">aac_fdk::AACEncoderFDK::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;out_stream)</div><div class="ttdoc">Defines the output stream.</div><div class="ttdef"><b>Definition:</b> AACEncoderFDK.h:44</div></div>
 <div class="ttc" id="anamespaceaac__fdk_html"><div class="ttname"><a href="namespaceaac__fdk.html">aac_fdk</a></div><div class="ttdef"><b>Definition:</b> AACDecoderFDK.h:9</div></div>
