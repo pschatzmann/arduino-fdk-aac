@@ -17,7 +17,7 @@
 
 static char log_buffer[512];
 enum LogLevel {Debug, Info, Warning, Error};
-static LogLevel minLogLevel = Debug;
+static LogLevel minLogLevel = Warning;
 
 static const char* levelName(LogLevel level) {
     switch(level){

@@ -28,11 +28,10 @@ void setup() {
     Serial.begin(115200);
 
     info.channels = 1;
-    info.sample_rate = 10000;
+    info.sample_rate = 44100;
     aac.begin(info);
 
     Serial.println("writing...");
-    aac.end();    
 
 }
 

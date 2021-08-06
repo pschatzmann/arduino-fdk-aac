@@ -178,7 +178,7 @@ public:
 		setAudioInfo(ai);
 	}
 
-	// convert PCM data to AAC
+	// convert PCM data to AAC - size in bytes
 	int32_t write(void *in_ptr, int in_size){
 		LOG(Debug,"write %d bytes", in_size);
 		if (input_buf==nullptr){
@@ -204,14 +204,11 @@ public:
 
 		if ((err = aacEncEncode(handle, &in_buf, &out_buf, &in_args, &out_args)) != AACENC_OK) {
 			// error
-			if (err != AACENC_ENCODE_EOF)
+			if (err != AACENC_ENCODE_EOF) {
 				LOG(Error,"Encoding failed\n");
-			return -1;
+				return 0;
+			}
 		}
-
-		// no output
-		if (out_args.numOutBytes == 0)
-			return -2;
 
 		// output to Arduino Stream	
 		provideResult((uint8_t*)outbuf, out_args.numOutBytes);
@@ -223,15 +220,15 @@ public:
 		LOG(Debug,__FUNCTION__);
 		active = false;
 		if (input_buf!=nullptr)
-			free(input_buf);
+			delete []input_buf;
 		input_buf = nullptr;
 
 		if (convert_buf!=nullptr)
-			free(convert_buf);
+			delete []convert_buf;
 		convert_buf = nullptr;
 
 		if (outbuf!=nullptr){
-			free(outbuf);
+			delete []outbuf;
 		}
 		outbuf=nullptr;
 
@@ -284,6 +281,7 @@ protected:
 
 	// starts the processing
 	void setup() {
+		LOG(Debug,__FUNCTION__);
 
 		switch (channels) {
 		case 1: mode = MODE_1;       break;
@@ -318,17 +316,17 @@ protected:
 		}
 
 		input_size = channels*2*info.frameLength;
-		input_buf = (uint8_t*) malloc(input_size);
+		input_buf = new uint8_t[input_size];
 		if (input_buf==nullptr){
 			LOG(Error,"Unable to allocate memory for input buffer\n");
 			return;
 		}
-		convert_buf = (int16_t*) malloc(input_size);
+		convert_buf = new int16_t[input_size];
 		if (convert_buf==nullptr){
 			LOG(Error,"Unable to allocate memory for convert buffer\n");
 			return;
 		}
-		outbuf = (uint8_t*) malloc(out_size);
+		outbuf = new uint8_t[out_size];
 		if (outbuf==nullptr){
 			LOG(Error,"Unable to allocate memory for output buffer\n");
 			return;
@@ -339,6 +337,8 @@ protected:
 	
 
 	int updateParams() {
+		LOG(Debug,__FUNCTION__);
+
 		if (setParameter(AACENC_AOT, aot) != AACENC_OK) {
 			LOG(Error,"Unable to set the AOT\n");
 			return -1;
@@ -350,7 +350,7 @@ protected:
 			}
 		}
 		if (setParameter(AACENC_SAMPLERATE, sample_rate) != AACENC_OK) {
-			LOG(Error,"Unable to set the AOT\n");
+			LOG(Error,"Unable to set the AACENC_SAMPLERATE\n");
 			return -1;
 		}
 		if (setParameter(AACENC_CHANNELMODE, mode) != AACENC_OK) {
@@ -385,8 +385,8 @@ protected:
 
 	/// return the result PWM data
 	void provideResult(uint8_t *data, size_t len){
-		LOG(Debug, "provideResult: %zu samples",len);
 		if (len>0){
+			LOG(Debug, "provideResult: %zu samples",len);
 			// provide result
 			if(aacCallback!=nullptr){
 				// output via callback
