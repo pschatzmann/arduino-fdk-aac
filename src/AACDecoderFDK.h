@@ -37,6 +37,7 @@ class AACDecoderFDK  {
 		 */
         AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048){
             this->output_buffer_size = output_buffer_size;
+            this->output_buffer = new INT_PCM[output_buffer_size];
             setDataCallback(dataCallback);
             setInfoCallback(infoCallback);
         }
@@ -60,7 +61,6 @@ class AACDecoderFDK  {
             end();
         }
 
-
         void setInfoCallback(AACInfoCallbackFDK cb){
             this->infoCallback = cb;
         }
@@ -69,12 +69,26 @@ class AACDecoderFDK  {
             this->pwmCallback = cb;
         }
 
-        void begin(){
-			begin(TT_UNKNOWN, 1);
+		/**
+		 * \brief Explicitly configure the decoder by passing a raw AudioSpecificConfig
+		 * (ASC) or a StreamMuxConfig (SMC), contained in a binary buffer. This is
+		 * required for MPEG-4 and Raw Packets file format bitstreams as well as for
+		 * LATM bitstreams with no in-band SMC. If the transport format is LATM with or
+		 * without LOAS, configuration is assumed to be an SMC, for all other file
+		 * formats an ASC.
+		 *
+		 * \param cfg    Pointer to an unsigned char buffer containing the binary
+		 * configuration buffer (either ASC or SMC).
+		 * \param len  Length of the configuration buffer in bytes.
+		 * \return        Error code.
+		 */
+		int setRawConfig(void* cfg, UINT &len){
+			uint8_t *ptr = (uint8_t *)cfg;
+			return aacDecoder_ConfigRaw(aacDecoderInfo, &ptr, &len);
 		}
 
         // opens the decoder
-        void begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
+        void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
 			LOG(Debug,__FUNCTION__);
 			int error;
             aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
@@ -82,6 +96,9 @@ class AACDecoderFDK  {
 				LOG(Error,"aacDecoder_Open -> Error");
 				return;
 			}
+
+			// if we decode 1 channel aac files we return output to 2 channels
+			aacDecoder_SetParam(aacDecoderInfo, AAC_PCM_MIN_OUTPUT_CHANNELS, 2);
 			is_open = true;
             return;
         }
@@ -97,29 +114,20 @@ class AACDecoderFDK  {
             return aacDecoder_ConfigRaw (aacDecoderInfo, &conf, &length );
         }
 
-        // write AAC data to be converted to PCM data
+        // write AAC data to be converted to PCM data - we feed the decoder witch batches of max 1k
       	virtual size_t write(const void *in_ptr, size_t in_size) {
-			LOG(Debug,"write %d bytes", in_size);
-			size_t result = 0;
-			if (aacDecoderInfo!=nullptr) {
-				uint32_t bytesValid = 0;
-				AAC_DECODER_ERROR error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&in_ptr, (const UINT*)&in_size, &bytesValid); 
-				if (error == AAC_DEC_OK) {
-					int flags = 0;
-					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, flags); 
-					// write pcm to output stream
-					if (error == AAC_DEC_OK){
-						provideResult(output_buffer, output_buffer_size);
-					}
-					// if not all bytes were used we process them now
-					if (bytesValid<in_size){
-						const uint8_t *start = static_cast<const uint8_t*>(in_ptr)+bytesValid;
-						uint32_t act_len = in_size-bytesValid;
-						aacDecoder_Fill(aacDecoderInfo, (UCHAR**) &start, &act_len, &bytesValid);
-					}
-				}
+			LOG(Debug,"write %zu bytes", in_size);
+			uint8_t *byte_ptr = (uint8_t *)in_ptr;
+			size_t open = in_size;
+			int pos = 0;
+			while(open>0){
+				// a frame is between 1 and 768 bytes
+				size_t len = min(open, 256);
+				int decoded = decode(byte_ptr+pos, len);
+				pos+=decoded;
+				open-=decoded;
 			}
-            return result;
+            return pos;
         }
 
         // provides detailed information about the stream
@@ -159,10 +167,39 @@ class AACDecoderFDK  {
         Stream *out = nullptr;
 #endif
 
+		/// decodes the data
+      	virtual size_t decode(const void *in_ptr, size_t in_size) {
+			LOG(Debug,"write %zu bytes", in_size);
+			size_t result = 0;
+			AAC_DECODER_ERROR error; 
+			if (aacDecoderInfo!=nullptr) {
+				uint32_t bytesValid = in_size;
+				const void *start = in_ptr;
+				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, (const UINT*)&in_size, &bytesValid); 
+				while (error == AAC_DEC_OK) {
+					int flags = 0;
+					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, flags); 
+					// write pcm to output stream
+					if (error == AAC_DEC_OK){
+						provideResult(output_buffer, output_buffer_size);
+					} else {
+						LOG(Error,"Decoding error: %d",error);
+					}
+					// if not all bytes were used we process them now
+					if (bytesValid>0){
+						const uint8_t *start = static_cast<const uint8_t*>(in_ptr)+bytesValid;
+						uint32_t act_len = in_size-bytesValid;
+						error = aacDecoder_Fill(aacDecoderInfo, (UCHAR**) &start, &act_len, &bytesValid);
+					}
+				}
+			}
+            return in_size;
+        }
+
 
         /// return the result PWM data
         void provideResult(INT_PCM *data, size_t len){
-            LOG(Debug, "provideResult: %d samples",len);
+            LOG(Debug, "provideResult: %zu samples",len);
              if (len>0){
 				 CStreamInfo info = audioInfo();
             	// provide result

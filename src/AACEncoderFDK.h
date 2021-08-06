@@ -385,7 +385,7 @@ protected:
 
 	/// return the result PWM data
 	void provideResult(uint8_t *data, size_t len){
-		LOG(Debug, "provideResult: %d samples",len);
+		LOG(Debug, "provideResult: %zu samples",len);
 		if (len>0){
 			// provide result
 			if(aacCallback!=nullptr){

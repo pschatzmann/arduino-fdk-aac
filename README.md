@@ -5,7 +5,7 @@ I was looking for a way to encode sound PCM data to the AAC or MPEG data format 
 
 The Android-targeted implementation of the Fraunhofer AAC can be used for encoding and decoding, uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.
 
-I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project,  converted it to an Arduino library and provided a simple Arduino friendly API.
+I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project,  converted it to an Arduino library and provided a simple Arduino friendly API. The only caveat is, that I have removed all optimized processor specific code (e.g. for ARM, 386 and mips), so that it will compile with the same code on all environements.
 
 
 ## Decoding Example
