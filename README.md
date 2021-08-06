@@ -94,7 +94,7 @@ git clone pschatzmann/arduino-fdk-aac.git
 
 ## Class Documentation
 
-The [generated class documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/) can be found here.
+The [generated class documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
 
 ## Compile Issues / Supported Architectures
 
