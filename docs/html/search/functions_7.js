@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['pcmdmx_5fapplyframe_2273',['pcmDmx_ApplyFrame',['../pcmdmx__lib_8h.html#ad63076ae1fef2a2dc1aa9025a4969104',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fclose_2274',['pcmDmx_Close',['../pcmdmx__lib_8h.html#a5c66c6b945afec0ac845f47c9bc9f06a',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fgetlibinfo_2275',['pcmDmx_GetLibInfo',['../pcmdmx__lib_8h.html#a058b9bac50aba465518bf5d433a5e635',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fgetparam_2276',['pcmDmx_GetParam',['../pcmdmx__lib_8h.html#aeb9c862a15bffac74aa90679ee059f4f',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fopen_2277',['pcmDmx_Open',['../pcmdmx__lib_8h.html#a96b34e1ab4e59ea55c1ec00f96aeeefd',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5freaddvbancdata_2278',['pcmDmx_ReadDvbAncData',['../pcmdmx__lib_8h.html#a2de9c10da81e3bc4350bcfae18fa787e',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5freset_2279',['pcmDmx_Reset',['../pcmdmx__lib_8h.html#a577a880e5e34b666bcc7cef12ca728b3',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fsetmatrixmixdownfrompce_2280',['pcmDmx_SetMatrixMixdownFromPce',['../pcmdmx__lib_8h.html#aee1e22d0ade428e41fd23328d3186811',1,'pcmdmx_lib.cpp']]],
-  ['pcmdmx_5fsetparam_2281',['pcmDmx_SetParam',['../pcmdmx__lib_8h.html#a427ea35ee84316cd28197a74d66a3a12',1,'pcmdmx_lib.cpp']]],
-  ['preparepsprocessing_2282',['PreparePsProcessing',['../psdec_8cpp.html#af240c7e7c3d943439a78da12fbc58a79',1,'PreparePsProcessing(HANDLE_PS_DEC h_ps_d, const FIXP_DBL *const *const rIntBufferLeft, const FIXP_DBL *const *const iIntBufferLeft, const int scaleFactorLowBand):&#160;psdec.cpp'],['../psdec_8h.html#af240c7e7c3d943439a78da12fbc58a79',1,'PreparePsProcessing(HANDLE_PS_DEC h_ps_d, const FIXP_DBL *const *const rIntBufferLeft, const FIXP_DBL *const *const iIntBufferLeft, const int scaleFactorLowBand):&#160;psdec.cpp']]]
+  ['setafterburner_88',['setAfterburner',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a74ffe6e2cbd95f2f133891d71b663b91',1,'aac_fdk::AACEncoderFDK']]],
+  ['setaudioinfo_89',['setAudioInfo',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#ab9772a80ef4697883785216bc36e2dc7',1,'aac_fdk::AACEncoderFDK']]],
+  ['setaudioobjecttype_90',['setAudioObjectType',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a5d561b344e2f4330a8fb122df8667680',1,'aac_fdk::AACEncoderFDK']]],
+  ['setbitrate_91',['setBitrate',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a139afb5f310cf44082d7ab24587e6b2d',1,'aac_fdk::AACEncoderFDK']]],
+  ['setdecoderflags_92',['setDecoderFlags',['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#ac0a9f3a247c5d46eceeb7d72ff355386',1,'aac_fdk::AACDecoderFDK']]],
+  ['setoutputbuffersize_93',['setOutputBufferSize',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#ab2506151ac71bbe8643392e3fd93580f',1,'aac_fdk::AACEncoderFDK']]],
+  ['setparameter_94',['setParameter',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a975bb9970cdcf8616c91ea4ca95ae8af',1,'aac_fdk::AACEncoderFDK']]],
+  ['setrawconfig_95',['setRawConfig',['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#ad06ab9a7174c1bd49dda1f0632012c2a',1,'aac_fdk::AACDecoderFDK']]],
+  ['setspecialbandreplication_96',['setSpecialBandReplication',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a3d70cf748ff889b6d48844bc19422233',1,'aac_fdk::AACEncoderFDK']]],
+  ['setstream_97',['setStream',['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a024569eb041a55ca2771d03cc743c312',1,'aac_fdk::AACDecoderFDK::setStream()'],['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#afca1e373837585b1dd2931abfe34291e',1,'aac_fdk::AACEncoderFDK::setStream(Stream &amp;out_stream)']]],
+  ['setup_98',['setup',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#aafcbbffed72b8e912f474745ca827b81',1,'aac_fdk::AACEncoderFDK']]]
 ];

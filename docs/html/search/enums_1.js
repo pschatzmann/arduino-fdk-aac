@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['channel_5fmode_3077',['CHANNEL_MODE',['../_f_d_k__audio_8h.html#a4c03bad3dfc905ed83eb9d683495683b',1,'FDK_audio.h']]]
+  ['transport_5ftype_103',['TRANSPORT_TYPE',['../namespaceaac__fdk.html#a2778be91ce5b9583922e12ed14800ab7',1,'aac_fdk']]]
 ];

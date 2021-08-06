@@ -56,7 +56,7 @@ public:
 				- CBR: Bitrate in bits/second.
 				- VBR: Variable bitrate. Bitrate argument will
 				be ignored. See \ref suppBitrates for details. */	
-	virtual void setBitrate(int bitrate){
+	 void setBitrate(int bitrate){
 		this->bitrate = bitrate;
 	}
 
@@ -77,11 +77,11 @@ public:
                    - 132: MPEG-2 AAC Low Complexity with Spectral Band
                  Replication (HE-AAC).
 
-                   Please note that the virtual MPEG-2 AOT's basically disables
+                   Please note that the  MPEG-2 AOT's basically disables
                  non-existing Perceptual Noise Substitution tool in AAC encoder
-                 and controls the MPEG_ID flag in adts header. The virtual
+                 and controls the MPEG_ID flag in adts header. The 
                  MPEG-2 AOT doesn't prohibit specific transport formats. */
-	virtual void setAudioObjectType(int aot){
+	 void setAudioObjectType(int aot){
 		this->aot = aot;
 	}
 
@@ -96,7 +96,7 @@ public:
                  on a case by case basis.
                    - 0: Disable afterburner (default).
                    - 1: Enable afterburner. */
-	virtual void setAfterburner(bool afterburner){
+	 void setAfterburner(bool afterburner){
 		this->afterburner = afterburner;
 	}
 
@@ -106,7 +106,7 @@ public:
 					- -1: Use ELD SBR auto configurator (default).
 					- 0: Disable Spectral Band Replication.
 					- 1: Enable Spectral Band Replication. */	
-	virtual void setSpecialBandReplication(int eld_sbr){
+	 void setSpecialBandReplication(int eld_sbr){
 		this->eld_sbr = eld_sbr;
 	}
 
@@ -128,7 +128,7 @@ public:
 				"high bitrate".
 				- 5: Variable bitrate mode, \ref vbrmode
 				"very high bitrate". */	
-	virtual void setVariableBitrateMode(int vbr){
+	 void setVariableBitrateMode(int vbr){
 		this->vbr = vbr;
 	}
 	
@@ -137,7 +137,7 @@ public:
 	 * 
 	 * @param outbuf_size 
 	 */
-	virtual void setOutputBufferSize(int outbuf_size){
+	 void setOutputBufferSize(int outbuf_size){
 		this->out_size = outbuf_size;
 	}
 
@@ -147,7 +147,7 @@ public:
 	 * @param info 
 	 * @return int 
 	 */
-	virtual void begin(AudioInfo  info) {
+	 void begin(AudioInfo  info) {
 		LOG(Debug,__FUNCTION__);
 		setAudioInfo(info);
 	}
@@ -160,7 +160,7 @@ public:
 	 * @param input_bits_per_sample 
 	 * @return int 0 => ok; error with negative number
 	 */
-	virtual void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
+	 void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
 		LOG(Debug,__FUNCTION__);
 		AudioInfo ai;
 		ai.channels = input_channels;
@@ -169,7 +169,7 @@ public:
 		setAudioInfo(ai);
 	}
 
-	// convert PCM data to AAC - size in bytes
+	/// write PCM data to be converted to AAC - The size is in bytes
 	int32_t write(void *in_ptr, int in_size){
 		LOG(Debug,"write %d bytes", in_size);
 		if (input_buf==nullptr){
@@ -206,7 +206,7 @@ public:
 		return in_size;
 	}
 
-	// release resources
+	/// closes the processing and release resources
 	void end(){
 		LOG(Debug,__FUNCTION__);
 		active = false;
@@ -226,10 +226,12 @@ public:
 		aacEncClose(&handle);
 	}
 
+	/// determines a decoder parameter
 	UINT getParameter(const AACENC_PARAM param) {
 		return aacEncoder_GetParam(handle, param);
 	}
 
+	/// sets an encoder parameter
 	int setParameter(AACENC_PARAM param, uint32_t value){
 		return aacEncoder_SetParam(handle, param, value);
 	}
@@ -271,7 +273,7 @@ protected:
 #endif
 
 	/// Defines the Audio Info
-    virtual void setAudioInfo(AudioInfo  from) {
+     void setAudioInfo(AudioInfo  from) {
 		LOG(Debug,__FUNCTION__);
 		this->channels = from.channels;
 		this->sample_rate = from.sample_rate;
@@ -280,7 +282,7 @@ protected:
     }
 
 
-	// starts the processing
+	/// starts the processing
 	void setup() {
 		LOG(Debug,__FUNCTION__);
 
