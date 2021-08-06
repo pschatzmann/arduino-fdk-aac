@@ -87,6 +87,21 @@ class AACDecoderFDK  {
 			return aacDecoder_ConfigRaw(aacDecoderInfo, &ptr, &len);
 		}
 
+		/**
+		* @brief Set the Decoder Flags object
+		* Bit field with flags for the decoder: \n
+		*                      (flags & AACDEC_CONCEAL) == 1: Do concealment. \n
+		*                      (flags & AACDEC_FLUSH) == 2: Discard input data. Flush
+		* filter banks (output delayed audio). \n (flags & AACDEC_INTR) == 4: Input
+		* data is discontinuous. Resynchronize any internals as
+		* necessary. \n (flags & AACDEC_CLRHIST) == 8: Clear all signal delay lines and
+		* history buffers.
+		 * @param flags 
+		 */
+		void setDecoderFlags(int flags){
+			decoder_flags = flags;
+		}
+
         // opens the decoder
         void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
 			LOG(Debug,__FUNCTION__);
@@ -121,7 +136,7 @@ class AACDecoderFDK  {
 			size_t open = in_size;
 			int pos = 0;
 			while(open>0){
-				// a frame is between 1 and 768 bytes
+				// a frame is between 1 and 768 bytes => so we feed the decoder with small chunks
 				size_t len = min(open, 256);
 				int decoded = decode(byte_ptr+pos, len);
 				pos+=decoded;
@@ -162,6 +177,7 @@ class AACDecoderFDK  {
 		CStreamInfo aacFrameInfo;
         AACDataCallbackFDK pwmCallback = nullptr;
         AACInfoCallbackFDK infoCallback = nullptr;
+		int decoder_flags = 0;
 
 #ifdef ARDUINO
         Stream *out = nullptr;
@@ -171,14 +187,14 @@ class AACDecoderFDK  {
       	virtual size_t decode(const void *in_ptr, size_t in_size) {
 			LOG(Debug,"write %zu bytes", in_size);
 			size_t result = 0;
+			
 			AAC_DECODER_ERROR error; 
 			if (aacDecoderInfo!=nullptr) {
 				uint32_t bytesValid = in_size;
 				const void *start = in_ptr;
 				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, (const UINT*)&in_size, &bytesValid); 
 				while (error == AAC_DEC_OK) {
-					int flags = 0;
-					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, flags); 
+					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, decoder_flags); 
 					// write pcm to output stream
 					if (error == AAC_DEC_OK){
 						provideResult(output_buffer, output_buffer_size);
