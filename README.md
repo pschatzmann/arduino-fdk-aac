@@ -85,12 +85,23 @@ void loop() {
 
 ## Installation
 
-You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
+For Arduino, you can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
 
 ```
 cd  ~/Documents/Arduino/libraries
 git clone pschatzmann/arduino-fdk-aac.git
 ```
+
+This project can also be built and executed on your desktop with cmake:
+
+```
+cd arduino-libmad
+mkdir build
+cd build
+cmake ..
+make
+```
+  
 
 ## Class Documentation
 
