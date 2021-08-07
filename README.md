@@ -95,7 +95,7 @@ git clone pschatzmann/arduino-fdk-aac.git
 This project can also be built and executed on your desktop with cmake:
 
 ```
-cd arduino-libmad
+cd arduino-fdk-aac
 mkdir build
 cd build
 cmake ..
@@ -105,7 +105,7 @@ make
 
 ## Class Documentation
 
-The [generated class documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
+The [generated Class Documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
 
 ## Compile Issues / Supported Architectures
 
