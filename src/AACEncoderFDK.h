@@ -27,7 +27,7 @@ class AACEncoderFDK  {
 
 public:
 
-	AACEncoder(){
+	AACEncoderFDK(){
 	}
 
 	 ~AACEncoderFDK(){
@@ -60,7 +60,7 @@ public:
 				- CBR: Bitrate in bits/second.
 				- VBR: Variable bitrate. Bitrate argument will
 				be ignored. See \ref suppBitrates for details. */	
-	 void setBitrate(int bitrate){
+	void setBitrate(int bitrate){
 		this->bitrate = bitrate;
 	}
 
@@ -85,7 +85,7 @@ public:
                  non-existing Perceptual Noise Substitution tool in AAC encoder
                  and controls the MPEG_ID flag in adts header. The 
                  MPEG-2 AOT doesn't prohibit specific transport formats. */
-	 void setAudioObjectType(int aot){
+	void setAudioObjectType(int aot){
 		this->aot = aot;
 	}
 
@@ -100,7 +100,7 @@ public:
                  on a case by case basis.
                    - 0: Disable afterburner (default).
                    - 1: Enable afterburner. */
-	 void setAfterburner(bool afterburner){
+	void setAfterburner(bool afterburner){
 		this->afterburner = afterburner;
 	}
 
@@ -110,7 +110,7 @@ public:
 					- -1: Use ELD SBR auto configurator (default).
 					- 0: Disable Spectral Band Replication.
 					- 1: Enable Spectral Band Replication. */	
-	 void setSpecialBandReplication(int eld_sbr){
+	void setSpecialBandReplication(int eld_sbr){
 		this->eld_sbr = eld_sbr;
 	}
 
@@ -132,7 +132,7 @@ public:
 				"high bitrate".
 				- 5: Variable bitrate mode, \ref vbrmode
 				"very high bitrate". */	
-	 void setVariableBitrateMode(int vbr){
+	void setVariableBitrateMode(int vbr){
 		this->vbr = vbr;
 	}
 	
@@ -141,7 +141,7 @@ public:
 	 * 
 	 * @param outbuf_size 
 	 */
-	 void setOutputBufferSize(int outbuf_size){
+	void setOutputBufferSize(int outbuf_size){
 		this->out_size = outbuf_size;
 	}
 
@@ -193,7 +193,7 @@ public:
 	}
 
 	/// write PCM data to be converted to AAC - The size is in bytes
-	int32_t write(void *in_ptr, int in_size){
+	int32_t write(uint8_t *in_ptr, int in_size){
 		LOG(Debug,"write %d bytes", in_size);
 		if (input_buf==nullptr){
 			LOG(Error,"The encoder is not open\n");
@@ -203,7 +203,7 @@ public:
 
 		in_args.numInSamples = in_size <= 0 ? -1 : in_size / 2;
 		in_buf.numBufs = 1;
-		in_buf.bufs = &in_ptr;
+		in_buf.bufs = (void**) &in_ptr;
 		in_buf.bufferIdentifiers = &in_identifier;
 		in_buf.bufSizes = &in_size;
 		in_buf.bufElSizes = &in_elem_size;
@@ -257,6 +257,10 @@ public:
 	/// sets an encoder parameter
 	int setParameter(AACENC_PARAM param, uint32_t value){
 		return aacEncoder_SetParam(handle, param, value);
+	}
+
+	operator boolean(){
+		return active;
 	}
 
 protected:

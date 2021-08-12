@@ -40,5 +40,5 @@ void loop() {
     for (int j=0;j<512;j++){
         buffer[j] = (rand() % 100) - 50;         
     }
-    aac.write(buffer, 512);
+    aac.write((uint8_t*)buffer, 512);
 }
