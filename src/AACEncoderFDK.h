@@ -415,7 +415,7 @@ protected:
 			} 
 #ifdef ARDUINO
 			if (out!=nullptr){
-				out->write((data, len);
+				out->write(data, len);
 			}
 #endif
 		}
