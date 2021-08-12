@@ -48,7 +48,7 @@ class AACDecoderFDK  {
         	LOG(Debug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
-			setOutput(out_stream)
+			setOutput(out_stream);
         }
 
 		/// Defines the output stream
@@ -228,7 +228,7 @@ class AACDecoderFDK  {
                         infoCallback(info);
                     }
 #ifdef ARDUINO
-                    out->write((uint8_t*)pwm_buffer, data, len*sizeof(INT_PCM));
+                    out->write((uint8_t*) data, len*sizeof(INT_PCM));
 #endif
                 }
                 aacFrameInfo = info;
