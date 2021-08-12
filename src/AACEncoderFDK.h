@@ -41,7 +41,7 @@ public:
 		this->out = &out_stream;
 	}
 	/// Defines the output stream
-	void setOutput(Stream &out_stream){
+	void setOutput(Print &out_stream){
 		this->out = &out_stream;
 	}
 
@@ -269,7 +269,7 @@ protected:
 	AACCallbackFDK aacCallback=nullptr;
 
 #ifdef ARDUINO
-	Stream *out;
+	Print *out;
 #endif
 
 	/// Defines the Audio Info

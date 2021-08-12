@@ -44,7 +44,7 @@ class AACDecoderFDK  {
 
 #ifdef ARDUINO
 
-        AACDecoderFDK(Stream &out_stream, int output_buffer_size=2048){
+        AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
         	LOG(Debug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
@@ -52,7 +52,7 @@ class AACDecoderFDK  {
         }
 
 		/// Defines the output stream
-		void setOutput(Stream &out_stream){
+		void setOutput(Print &out_stream){
             this->out = &out_stream;
 		}
 
@@ -180,7 +180,7 @@ class AACDecoderFDK  {
 		int decoder_flags = 0;
 
 #ifdef ARDUINO
-        Stream *out = nullptr;
+        Print *out = nullptr;
 #endif
 
 		/// decodes the data
