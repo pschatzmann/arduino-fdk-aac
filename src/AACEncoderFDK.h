@@ -141,6 +141,15 @@ public:
 		this->out_size = outbuf_size;
 	}
 
+	/// Defines the Audio Info
+     void setAudioInfo(AudioInfo  from) {
+		LOG(Debug,__FUNCTION__);
+		this->channels = from.channels;
+		this->sample_rate = from.sample_rate;
+		this->bits_per_sample = from.bits_per_sample;
+		setup();
+    }
+	
 	/**
 	 * @brief Opens the encoder  
 	 * 
@@ -272,14 +281,7 @@ protected:
 	Print *out;
 #endif
 
-	/// Defines the Audio Info
-     void setAudioInfo(AudioInfo  from) {
-		LOG(Debug,__FUNCTION__);
-		this->channels = from.channels;
-		this->sample_rate = from.sample_rate;
-		this->bits_per_sample = from.bits_per_sample;
-		setup();
-    }
+
 
 
 	/// starts the processing
