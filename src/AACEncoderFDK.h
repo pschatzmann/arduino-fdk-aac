@@ -27,16 +27,20 @@ class AACEncoderFDK  {
 
 public:
 
+	AACEncoder(){
+	}
+
+	 ~AACEncoderFDK(){
+		 end();
+	 }
+
 	AACEncoderFDK(AACCallbackFDK cb=nullptr){
         setDataCallback(cb);
 	}
 
-	void setDataCallback(AACCallbackFDK cb){
-		this->aacCallback = cb;
-	}
-
 
 #ifdef ARDUINO
+
 	AACEncoderFDK(Stream &out_stream){
 		this->out = &out_stream;
 	}
@@ -47,9 +51,9 @@ public:
 
 #endif
 
-	 ~AACEncoderFDK(){
-		 end();
-	 }
+	void setDataCallback(AACCallbackFDK cb){
+		this->aacCallback = cb;
+	}
 
 	/*!< Total encoder bitrate. This parameter is	
 				mandatory and interacts with ::AACENC_BITRATEMODE.
