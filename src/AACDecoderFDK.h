@@ -48,11 +48,11 @@ class AACDecoderFDK  {
         	LOG(Debug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
-			setStream(out_stream)
+			setOutput(out_stream)
         }
 
 		/// Defines the output stream
-		void setStream(Stream &out_stream){
+		void setOutput(Stream &out_stream){
             this->out = &out_stream;
 		}
 
@@ -146,7 +146,7 @@ class AACDecoderFDK  {
         }
 
         // provides detailed information about the stream
-        CStreamInfo &audioInfo(){
+        CStreamInfo audioInfo(){
             return *aacDecoder_GetStreamInfo(aacDecoderInfo);
         }
 

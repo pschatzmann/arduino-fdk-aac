@@ -41,7 +41,7 @@ public:
 		this->out = &out_stream;
 	}
 	/// Defines the output stream
-	void setStream(Stream &out_stream){
+	void setOutput(Stream &out_stream){
 		this->out = &out_stream;
 	}
 
