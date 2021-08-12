@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 # set the project name
-project(decode)
+project(fdk-decode)
 include(FetchContent)
 
 set (DCMAKE_CXX_FLAGS -Werror -Wall -Wextra)
@@ -18,8 +18,8 @@ endif()
 
 
 # build sketch as executable  
-add_executable (decode decode.cpp )
-target_compile_options(decode PRIVATE -DEMULATOR)
+add_executable (fdk-decode decode.cpp )
+target_compile_options(fdk-decode PRIVATE -DEMULATOR)
 
 # specify libraries
-target_link_libraries(decode fdk_aac arduino_emulator)
+target_link_libraries(fdk-decode fdk_aac arduino_emulator)
