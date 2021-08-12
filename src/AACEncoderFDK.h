@@ -34,7 +34,7 @@ public:
 		 end();
 	 }
 
-	AACEncoderFDK(AACCallbackFDK cb=nullptr){
+	AACEncoderFDK(AACCallbackFDK cb){
         setDataCallback(cb);
 	}
 
