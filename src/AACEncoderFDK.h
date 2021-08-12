@@ -147,9 +147,17 @@ public:
 		this->channels = from.channels;
 		this->sample_rate = from.sample_rate;
 		this->bits_per_sample = from.bits_per_sample;
-		setup();
     }
 	
+	/**
+	 * @brief Opens the encoder - Please call setAudioInfo before
+	 * 
+	 */
+	 void begin() {
+		LOG(Debug,__FUNCTION__);
+		setup();
+	}
+
 	/**
 	 * @brief Opens the encoder  
 	 * 
@@ -159,6 +167,7 @@ public:
 	 void begin(AudioInfo  info) {
 		LOG(Debug,__FUNCTION__);
 		setAudioInfo(info);
+		setup();
 	}
 
 	/**
@@ -176,6 +185,7 @@ public:
 		ai.sample_rate = input_sample_rate;
 		ai.bits_per_sample = input_bits_per_sample;
 		setAudioInfo(ai);
+		setup();
 	}
 
 	/// write PCM data to be converted to AAC - The size is in bytes
@@ -280,8 +290,6 @@ protected:
 #ifdef ARDUINO
 	Print *out;
 #endif
-
-
 
 
 	/// starts the processing
@@ -399,7 +407,7 @@ protected:
 			} 
 #ifdef ARDUINO
 			if (out!=nullptr){
-				out->write((uint8_t*)pwm_buffer, data, len*sizeof(INT_PCM));
+				out->write((uint8_t*) data, len*sizeof(INT_PCM));
 			}
 #endif
 		}
