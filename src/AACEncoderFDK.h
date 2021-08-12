@@ -415,7 +415,7 @@ protected:
 			} 
 #ifdef ARDUINO
 			if (out!=nullptr){
-				out->write((uint8_t*) data, len*sizeof(INT_PCM));
+				out->write((data, len);
 			}
 #endif
 		}
