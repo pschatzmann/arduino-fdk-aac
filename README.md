@@ -105,7 +105,9 @@ make
 
 ## Class Documentation
 
-The [generated Class Documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
+- The [generated Class Documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
+- I also suggest that you have a look at [my related Blog](https://www.pschatzmann.ch/home/2021/08/13/audio-decoders-for-microcontrollers/)
+
 
 ## Compile Issues / Supported Architectures
 
