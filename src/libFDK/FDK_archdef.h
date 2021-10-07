@@ -230,6 +230,13 @@ amm-info@iis.fraunhofer.de
 #define LDCOEFF_16BIT
 #define WINDOWTABLE_16BIT
 
+#elif defined(ESP32)
+#define ARCH_PREFER_MULT_16x16
+#undef SINETABLE_16BIT
+#undef WINDOWTABLE_16BIT
+#undef POW2COEFF_16BIT
+#undef LDCOEFF_16BIT
+
 #else
 #warning >>>> Please set architecture characterization defines for your platform (FDK_HIGH_PERFORMANCE)! <<<<
 

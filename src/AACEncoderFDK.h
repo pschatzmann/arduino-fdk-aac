@@ -182,14 +182,14 @@ public:
 	 * @param input_bits_per_sample 
 	 * @return int 0 => ok; error with negative number
 	 */
-	 void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
+	 bool begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
 		LOG(Debug,__FUNCTION__);
 		AudioInfo ai;
 		ai.channels = input_channels;
 		ai.sample_rate = input_sample_rate;
 		ai.bits_per_sample = input_bits_per_sample;
 		setAudioInfo(ai);
-		setup();
+		return setup();
 	}
 
 	/// write PCM data to be converted to AAC - The size is in bytes
@@ -301,7 +301,7 @@ protected:
 
 
 	/// starts the processing
-	void setup() {
+	bool setup() {
 		LOG(Debug,__FUNCTION__);
 
 		switch (channels) {
@@ -313,47 +313,48 @@ protected:
 		case 6: mode = MODE_1_2_2_1; break;
 		default:
 			LOG(Error,"Unsupported WAV channels\n");
-			return;
+			return false;
 		}
-
-		if (aacEncOpen(&handle, 0, channels) != AACENC_OK) {
-			LOG(Error,"Unable to open encoder\n");
-			return;
+		AACENC_ERROR rc = aacEncOpen(&handle, 0, channels);
+		if (rc != AACENC_OK) {
+			LOG(Error,"Unable to open encoder: %s\n",setupErrorText(rc));
+			return false;
 		}
 
 		if (updateParams()<0) {
 			LOG(Error,"Unable to update parameters\n");
-			return;
+			return false;
 		}
 
 		if (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {
 			LOG(Error,"Unable to initialize the encoder\n");
-			return;
+			return false;
 		}
 
 		if (aacEncInfo(handle, &info) != AACENC_OK) {
 			LOG(Error,"Unable to get the encoder info\n");
-			return;
+			return false;
 		}
 
 		input_size = channels*2*info.frameLength;
 		input_buf = new uint8_t[input_size];
 		if (input_buf==nullptr){
 			LOG(Error,"Unable to allocate memory for input buffer\n");
-			return;
+			return false;
 		}
 		convert_buf = new int16_t[input_size];
 		if (convert_buf==nullptr){
 			LOG(Error,"Unable to allocate memory for convert buffer\n");
-			return;
+			return false;
 		}
 		outbuf = new uint8_t[out_size];
 		if (outbuf==nullptr){
 			LOG(Error,"Unable to allocate memory for output buffer\n");
-			return;
+			return false;
 		}
 
 		active = true;
+		return true;
 	}
 	
 
@@ -419,7 +420,41 @@ protected:
 			}
 #endif
 		}
-	}    
+	} 
+
+	/// convert error code to error text
+	const char* setupErrorText(int no) {
+		switch(no){
+			case AACENC_OK: 
+				return "No error";
+			case AACENC_INVALID_HANDLE:
+				return "Handle passed to function call was invalid";
+			case AACENC_MEMORY_ERROR:
+				return "Memory allocation failed";
+			case AACENC_UNSUPPORTED_PARAMETER: 
+				return "Parameter not available";
+			case AACENC_INVALID_CONFIG:
+				return "Configuration not provided";
+			case AACENC_INIT_ERROR: 
+				return "General initialization error";
+			case AACENC_INIT_AAC_ERROR: 
+				return "AAC library initialization error";
+			case AACENC_INIT_SBR_ERROR: 
+				return "SBR library initialization error";
+			case AACENC_INIT_TP_ERROR:
+				return "Transport library initialization error";
+			case AACENC_INIT_META_ERROR: 
+				return "Meta data library initialization error";
+			case AACENC_INIT_MPS_ERROR:
+				return " MPS library initialization error";
+			case AACENC_ENCODE_ERROR:
+				return "The encoding process was interrupted by an unexpected error";
+			case AACENC_ENCODE_EOF:
+				return "End of file reached";
+
+		}   
+		return "n/a";	
+	}
 
 };
 
