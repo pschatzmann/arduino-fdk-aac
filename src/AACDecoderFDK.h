@@ -137,7 +137,7 @@ class AACDecoderFDK  {
 			int pos = 0;
 			while(open>0){
 				// a frame is between 1 and 768 bytes => so we feed the decoder with small chunks
-				size_t len = min(open, 256);
+				size_t len = std::min<int>(open, 256);
 				int decoded = decode(byte_ptr+pos, len);
 				pos+=decoded;
 				open-=decoded;
