@@ -197,7 +197,7 @@ public:
 		LOG(Debug,"write %d bytes", in_size);
 		if (input_buf==nullptr){
 			LOG(Error,"The encoder is not open\n");
-			return -1;
+			return 0;
 		}
 		in_elem_size = 2;
 
