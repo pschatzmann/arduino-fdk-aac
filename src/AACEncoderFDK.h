@@ -294,6 +294,7 @@ protected:
 	AACENC_ERROR err;
 	bool active;
 	AACCallbackFDK aacCallback=nullptr;
+	UINT encModules=1;
 
 #ifdef ARDUINO
 	Print *out;
@@ -421,6 +422,10 @@ protected:
 #endif
 		}
 	} 
+
+	void setEncModule(UINT encModules){
+		this->encModules = encModules;
+	}
 
 	/// convert error code to error text
 	const char* setupErrorText(int no) {
