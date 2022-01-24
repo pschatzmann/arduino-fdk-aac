@@ -18,7 +18,6 @@ struct AudioInfo  {
     int bits_per_sample=16; // we assume int16_t
 };
 
-
 /**
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
  * 
@@ -147,7 +146,7 @@ public:
 
 	/// Defines the Audio Info
      void setAudioInfo(AudioInfo  from) {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 		this->channels = from.channels;
 		this->sample_rate = from.sample_rate;
 		this->bits_per_sample = from.bits_per_sample;
@@ -158,7 +157,7 @@ public:
 	 * 
 	 */
 	 void begin() {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 		setup();
 	}
 
@@ -169,7 +168,7 @@ public:
 	 * @return int 
 	 */
 	 void begin(AudioInfo  info) {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 		setAudioInfo(info);
 		setup();
 	}
@@ -183,7 +182,7 @@ public:
 	 * @return int 0 => ok; error with negative number
 	 */
 	 bool begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 		AudioInfo ai;
 		ai.channels = input_channels;
 		ai.sample_rate = input_sample_rate;
@@ -194,9 +193,9 @@ public:
 
 	/// write PCM data to be converted to AAC - The size is in bytes
 	int32_t write(uint8_t *in_ptr, int in_size){
-		LOG(Debug,"write %d bytes", in_size);
+		LOG_FDK(FDKDebug,"write %d bytes", in_size);
 		if (input_buf==nullptr){
-			LOG(Error,"The encoder is not open\n");
+			LOG_FDK(FDKError,"The encoder is not open\n");
 			return 0;
 		}
 		in_elem_size = 2;
@@ -219,7 +218,7 @@ public:
 		if ((err = aacEncEncode(handle, &in_buf, &out_buf, &in_args, &out_args)) != AACENC_OK) {
 			// error
 			if (err != AACENC_ENCODE_EOF) {
-				LOG(Error,"Encoding failed\n");
+				LOG_FDK(FDKError,"Encoding failed\n");
 				return 0;
 			}
 		}
@@ -231,7 +230,7 @@ public:
 
 	/// closes the processing and release resources
 	void end(){
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 		active = false;
 		if (input_buf!=nullptr)
 			delete []input_buf;
@@ -270,7 +269,7 @@ protected:
 	int ch = 0;
 	const char *infile;
 	void *wav;
-	int format, sample_rate, channels, bits_per_sample;
+	int format, sample_rate, channels=2, bits_per_sample;
 	int input_size;
 	uint8_t* input_buf = nullptr;
 	int16_t* convert_buf = nullptr;
@@ -290,7 +289,7 @@ protected:
 	int out_elem_size;
 	void *in_ptr, *out_ptr;
 	uint8_t* outbuf;
-	int out_size = 20480;
+	int out_size = 2048;
 	AACENC_ERROR err;
 	bool active;
 	AACCallbackFDK aacCallback=nullptr;
@@ -300,10 +299,9 @@ protected:
 	Print *out;
 #endif
 
-
 	/// starts the processing
 	bool setup() {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 
 		switch (channels) {
 		case 1: mode = MODE_1;       break;
@@ -313,44 +311,44 @@ protected:
 		case 5: mode = MODE_1_2_2;   break;
 		case 6: mode = MODE_1_2_2_1; break;
 		default:
-			LOG(Error,"Unsupported WAV channels\n");
+			LOG_FDK(FDKError,"Unsupported WAV channels\n");
 			return false;
 		}
 		AACENC_ERROR rc = aacEncOpen(&handle, 0, channels);
 		if (rc != AACENC_OK) {
-			LOG(Error,"Unable to open encoder: %s\n",setupErrorText(rc));
+			LOG_FDK(FDKError,"Unable to open encoder: %s\n",setupErrorText(rc));
 			return false;
 		}
 
 		if (updateParams()<0) {
-			LOG(Error,"Unable to update parameters\n");
+			LOG_FDK(FDKError,"Unable to update parameters\n");
 			return false;
 		}
 
 		if (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {
-			LOG(Error,"Unable to initialize the encoder\n");
+			LOG_FDK(FDKError,"Unable to initialize the encoder\n");
 			return false;
 		}
 
 		if (aacEncInfo(handle, &info) != AACENC_OK) {
-			LOG(Error,"Unable to get the encoder info\n");
+			LOG_FDK(FDKError,"Unable to get the encoder info\n");
 			return false;
 		}
 
 		input_size = channels*2*info.frameLength;
 		input_buf = new uint8_t[input_size];
 		if (input_buf==nullptr){
-			LOG(Error,"Unable to allocate memory for input buffer\n");
+			LOG_FDK(FDKError,"Unable to allocate memory for input buffer\n");
 			return false;
 		}
 		convert_buf = new int16_t[input_size];
 		if (convert_buf==nullptr){
-			LOG(Error,"Unable to allocate memory for convert buffer\n");
+			LOG_FDK(FDKError,"Unable to allocate memory for convert buffer\n");
 			return false;
 		}
 		outbuf = new uint8_t[out_size];
 		if (outbuf==nullptr){
-			LOG(Error,"Unable to allocate memory for output buffer\n");
+			LOG_FDK(FDKError,"Unable to allocate memory for output buffer\n");
 			return false;
 		}
 
@@ -360,47 +358,47 @@ protected:
 	
 
 	int updateParams() {
-		LOG(Debug,__FUNCTION__);
+		LOG_FDK(FDKDebug,__FUNCTION__);
 
 		if (setParameter(AACENC_AOT, aot) != AACENC_OK) {
-			LOG(Error,"Unable to set the AOT\n");
+			LOG_FDK(FDKError,"Unable to set the AOT\n");
 			return -1;
 		}
 		if (aot == 39 && eld_sbr) {
 			if (setParameter(AACENC_SBR_MODE, 1) != AACENC_OK) {
-				LOG(Error,"Unable to set SBR mode for ELD\n");
+				LOG_FDK(FDKError,"Unable to set SBR mode for ELD\n");
 				return -1;
 			}
 		}
 		if (setParameter(AACENC_SAMPLERATE, sample_rate) != AACENC_OK) {
-			LOG(Error,"Unable to set the AACENC_SAMPLERATE\n");
+			LOG_FDK(FDKError,"Unable to set the AACENC_SAMPLERATE\n");
 			return -1;
 		}
 		if (setParameter(AACENC_CHANNELMODE, mode) != AACENC_OK) {
-			LOG(Error,"Unable to set the channel mode\n");
+			LOG_FDK(FDKError,"Unable to set the channel mode\n");
 			return -1;
 		}
 		if (setParameter(AACENC_CHANNELORDER, 1) != AACENC_OK) {
-			LOG(Error,"Unable to set the wav channel order\n");
+			LOG_FDK(FDKError,"Unable to set the wav channel order\n");
 			return -1;
 		}
 		if (vbr) {
 			if (setParameter(AACENC_BITRATEMODE, vbr) != AACENC_OK) {
-				LOG(Error,"Unable to set the VBR bitrate mode\n");
+				LOG_FDK(FDKError,"Unable to set the VBR bitrate mode\n");
 				return -1;
 			}
 		} else {
 			if (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {
-				LOG(Error,"Unable to set the bitrate\n");
+				LOG_FDK(FDKError,"Unable to set the bitrate\n");
 				return -1;
 			}
 		}
 		if (setParameter(AACENC_TRANSMUX, TT_MP4_ADTS) != AACENC_OK) {
-			LOG(Error,"Unable to set the ADTS transmux\n");
+			LOG_FDK(FDKError,"Unable to set the ADTS transmux\n");
 			return -1;
 		}
 		if (setParameter(AACENC_AFTERBURNER, afterburner) != AACENC_OK) {
-			LOG(Error,"Unable to set the afterburner mode\n");
+			LOG_FDK(FDKError,"Unable to set the afterburner mode\n");
 			return -1;
 		}
 		return 0;
@@ -409,7 +407,7 @@ protected:
 	/// return the result PWM data
 	void provideResult(uint8_t *data, size_t len){
 		if (len>0){
-			LOG(Debug, "provideResult: %zu samples",len);
+			LOG_FDK(FDKDebug, "provideResult: %zu samples",len);
 			// provide result
 			if(aacCallback!=nullptr){
 				// output via callback

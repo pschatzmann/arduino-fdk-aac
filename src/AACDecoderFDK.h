@@ -23,7 +23,7 @@ class AACDecoderFDK  {
 		 * @param output_buffer_size 
 		 */
         AACDecoderFDK(int output_buffer_size=2048){
-        	LOG(Debug,__FUNCTION__);
+        	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
 		}
@@ -45,7 +45,7 @@ class AACDecoderFDK  {
 #ifdef ARDUINO
 
         AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
-        	LOG(Debug,__FUNCTION__);
+        	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
 			setOutput(out_stream);
@@ -104,11 +104,11 @@ class AACDecoderFDK  {
 
         // opens the decoder
         void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
-			LOG(Debug,__FUNCTION__);
+			LOG_FDK(FDKDebug,__FUNCTION__);
 			int error;
             aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
 			if (aacDecoderInfo==NULL){
-				LOG(Error,"aacDecoder_Open -> Error");
+				LOG_FDK(FDKError,"aacDecoder_Open -> Error");
 				return;
 			}
 
@@ -131,7 +131,7 @@ class AACDecoderFDK  {
 
         // write AAC data to be converted to PCM data - we feed the decoder witch batches of max 1k
       	virtual size_t write(const void *in_ptr, size_t in_size) {
-			LOG(Debug,"write %zu bytes", in_size);
+			LOG_FDK(FDKDebug,"write %zu bytes", in_size);
 			uint8_t *byte_ptr = (uint8_t *)in_ptr;
 			size_t open = in_size;
 			int pos = 0;
@@ -152,7 +152,7 @@ class AACDecoderFDK  {
 
         // release the resources
         void end(){
-	 		LOG(Debug,__FUNCTION__);
+	 		LOG_FDK(FDKDebug,__FUNCTION__);
             if (aacDecoderInfo!=nullptr){
                 aacDecoder_Close(aacDecoderInfo); 
                 aacDecoderInfo = nullptr;
@@ -185,7 +185,7 @@ class AACDecoderFDK  {
 
 		/// decodes the data
       	virtual size_t decode(const void *in_ptr, size_t in_size) {
-			LOG(Debug,"write %zu bytes", in_size);
+			LOG_FDK(FDKDebug,"write %zu bytes", in_size);
 			size_t result = 0;
 			
 			AAC_DECODER_ERROR error; 
@@ -199,7 +199,7 @@ class AACDecoderFDK  {
 					if (error == AAC_DEC_OK){
 						provideResult(output_buffer, output_buffer_size);
 					} else {
-						LOG(Error,"Decoding error: %d",error);
+						LOG_FDK(FDKError,"Decoding error: %d",error);
 					}
 					// if not all bytes were used we process them now
 					if (bytesValid>0){
@@ -215,7 +215,7 @@ class AACDecoderFDK  {
 
         /// return the result PWM data
         void provideResult(INT_PCM *data, size_t len){
-            LOG(Debug, "provideResult: %zu samples",len);
+            LOG_FDK(FDKDebug, "provideResult: %zu samples",len);
              if (len>0){
 				 CStreamInfo info = audioInfo();
             	// provide result
