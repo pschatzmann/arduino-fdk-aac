@@ -105,7 +105,6 @@ class AACDecoderFDK  {
         // opens the decoder
         void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
 			LOG_FDK(FDKDebug,__FUNCTION__);
-			int error;
             aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
 			if (aacDecoderInfo==NULL){
 				LOG_FDK(FDKError,"aacDecoder_Open -> Error");
@@ -209,7 +208,10 @@ class AACDecoderFDK  {
 					}
 				}
 			}
-            return in_size;
+			if (error == AAC_DEC_OK){
+				result = in_size;
+			}
+            return result;
         }
 
 
