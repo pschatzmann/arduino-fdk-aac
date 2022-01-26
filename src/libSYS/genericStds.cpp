@@ -215,7 +215,7 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 
 #else
 
-	void *FDKcallocExt(const UINT n, const UINT size, int8_t alignment) {
+	void *FDKcallocExt(const UINT n, const UINT size, const UCHAR) {
     return FDKcalloc(n, size);
   }
 

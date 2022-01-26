@@ -157,7 +157,11 @@ public:
 		this->out_size = outbuf_size;
 	}
 
-	/// Defines the Audio Info
+
+	/**
+	 * @brief Defines/Updates the Audio Info 
+	 * @param from 
+	 */ 
      void setAudioInfo(AudioInfo  from) {
 		LOG_FDK(FDKDebug,__FUNCTION__);
 		this->channels = from.channels;
@@ -354,7 +358,7 @@ protected:
 				return false;
 			}
 
-			if (outbuf!=nullptr){
+			if (outbuf==nullptr){
 				outbuf = new uint8_t[out_size];
 				if (outbuf==nullptr){
 					LOG_FDK(FDKError,"Unable to allocate memory for output buffer\n");
