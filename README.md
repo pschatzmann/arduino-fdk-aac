@@ -82,6 +82,12 @@ void loop() {
 
 ```
 
+## Logging
+
+The log level can be defined with the help of the global LOGLEVEL_FDK variable. By default it is set to FDKWarning. You can change it by calling e.g.
+```
+LOGLEVEL_FDK = FDKInfo;
+```
 
 ## Installation
 

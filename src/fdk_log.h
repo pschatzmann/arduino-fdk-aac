@@ -18,7 +18,7 @@
 
 static char log_buffer[512];
 enum LogLevelFDK {FDKDebug, FDKInfo, FDKWarning, FDKError};
-static LogLevelFDK minLogLevelFDK = FDKWarning;
+static LogLevelFDK LOGLEVEL_FDK = FDKWarning;
 
 static const char* levelName(LogLevelFDK level) {
     switch(level){
@@ -59,7 +59,7 @@ static void printLogFDK(const char* file, int line, LogLevelFDK current_level) {
 }
 
 // We print the log based on the log level
-#define LOG_FDK(level,...) { if(level>=minLogLevelFDK) {  snprintf(log_buffer,512, __VA_ARGS__);  printLogFDK(__FILE__,__LINE__, level); } }
+#define LOG_FDK(level,...) { if(level>=LOGLEVEL_FDK) {  snprintf(log_buffer,512, __VA_ARGS__);  printLogFDK(__FILE__,__LINE__, level); } }
 #else
 // Remove all log statments from the code
 #define LOG_FDK(FDKDebug, ...) 

@@ -270,7 +270,7 @@ public:
 
 protected:
 	// common variables
-	int vbr = 0; // variable bitrate mode
+	int vbr = 1; // variable bitrate mode
 	int bitrate = 0; // automatic determination
 	int ch = 0;
 	int format, sample_rate, channels=2, bits_per_sample;
