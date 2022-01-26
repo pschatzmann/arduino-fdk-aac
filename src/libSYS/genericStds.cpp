@@ -134,15 +134,9 @@ amm-info@iis.fraunhofer.de
 
 /* Include OS/System specific implementations. */
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 #ifdef ESP32
  #include "esp_heap_caps.h"
- UCHAR alignment_ = 1;
 #endif
-
 
 
 void FDKprintf(const char *szFmt, ...) {
@@ -196,19 +190,35 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
  * DYNAMIC MEMORY management (heap)
  *************************************************************************/
 #ifdef ESP32
-	void *FDKcalloc(const UINT n, const UINT size) {
-	  void *ptr;
 
-	  if (alignment_ >=4) ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT);
-		 else  ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
-	  printf("==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]\n", alignment_, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
+	void *FDKcalloc(const UINT n, const UINT size) {
+    return FDKcallocExt(n, size, 1);
+  }
+
+  // allocate memory with an optional alignment information
+	void *FDKcallocExt(const UINT n, const UINT size, const UCHAR alignment) {
+    UCHAR alignment_effective = alignment;
+	  void *ptr=nullptr;
+//	  if (alignment%4 == 0 || size==4 || size==8 || size>20000){
+	  if (alignment%4 == 0){
+       alignment_effective = 4;
+       ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT); 
+    } else {
+       ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
+    }
+	  printf("==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]\n", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
 	  if (!ptr) {
-		printf("Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]\n", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
+		  printf("Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]\n", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
 	  }
-	  alignment_ = 1;
 	  return ptr;
 	}
+
 #else
+
+	void *FDKcallocExt(const UINT n, const UINT size, int8_t alignment) {
+    return FDKcalloc(n, size);
+  }
+
 	void *FDKcalloc(const UINT n, const UINT size) {
 	  void *ptr;
 
@@ -216,6 +226,7 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 
 	  return ptr;
 	}
+
 #endif
 
 void *FDKmalloc(const UINT size) {
@@ -230,10 +241,7 @@ void FDKfree(void *ptr) { free((INT *)ptr); }
 
 void *FDKaalloc(const UINT size, const UINT alignment) {
   void *addr, *result = NULL;
-  #ifdef ESP32
-   alignment_ = alignment;
-  #endif
-  addr = FDKcalloc(1, size + alignment +(UINT)sizeof(void *)); /* Malloc and clear memory. */
+  addr = FDKcallocExt(1, size + alignment +(UINT)sizeof(void *), alignment); /* Malloc and clear memory. */
   if (addr != NULL) {
     result = ALIGN_PTR((unsigned char *)addr +
                        sizeof(void *)); /* Get aligned memory base address. */
@@ -268,9 +276,6 @@ void FDKfree_L(void *p) { FDKfree(p); }
 
 void *FDKaalloc_L(const UINT size, const UINT alignment, MEMORY_SECTION s) {
   void *addr, *result = NULL;
-  #ifdef ESP32
-   alignment_ = alignment;
-  #endif
   addr = FDKcalloc_L(1, size + alignment + (UINT)sizeof(void *),
                      s); /* Malloc and clear memory.         */
   

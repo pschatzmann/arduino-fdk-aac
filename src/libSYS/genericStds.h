@@ -400,6 +400,8 @@ char *FDKstrncpy(char *dest, const char *src, const UINT n);
 #define FDK_MAX_OVERLAYS 8 /**< Maximum number of memory overlays. */
 
 void *FDKcalloc(const UINT n, const UINT size);
+void *FDKcallocExt(const UINT n, const UINT size, const UCHAR alignment);
+
 void *FDKmalloc(const UINT size);
 void FDKfree(void *ptr);
 

@@ -57,7 +57,7 @@ class AACDecoderFDK  {
 		}
 
 #endif
-        ~AACDecoderFDK(){
+        virtual ~AACDecoderFDK(){
             end();
         }
 

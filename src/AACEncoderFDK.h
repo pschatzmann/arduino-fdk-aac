@@ -13,8 +13,8 @@ typedef void (*AACCallbackFDK)(uint8_t *aac_data, size_t len);
 struct AudioInfo  {
     AudioInfo () = default;
     AudioInfo (const AudioInfo  &) = default;
-    int sample_rate = 44100;    // undefined
-    int channels = 1;       // undefined
+    int sample_rate = 44100;    
+    int channels = 1;      
     int bits_per_sample=16; // we assume int16_t
 };
 
@@ -109,7 +109,7 @@ public:
 					- -1: Use ELD SBR auto configurator (default).
 					- 0: Disable Spectral Band Replication.
 					- 1: Enable Spectral Band Replication. */	
-	void setSpecialBandReplication(int eld_sbr){
+	void setSpectralBandReplication(int eld_sbr){
 		this->eld_sbr = eld_sbr;
 	}
 
@@ -194,10 +194,6 @@ public:
 	/// write PCM data to be converted to AAC - The size is in bytes
 	int32_t write(uint8_t *in_ptr, int in_size){
 		LOG_FDK(FDKDebug,"write %d bytes", in_size);
-		if (input_buf==nullptr){
-			LOG_FDK(FDKError,"The encoder is not open\n");
-			return 0;
-		}
 		in_elem_size = 2;
 
 		in_args.numInSamples = in_size <= 0 ? -1 : in_size / 2;
@@ -207,18 +203,18 @@ public:
 		in_buf.bufSizes = &in_size;
 		in_buf.bufElSizes = &in_elem_size;
 
-		out_ptr = outbuf;
 		out_elem_size = 1;
 		out_buf.numBufs = 1;
-		out_buf.bufs = &out_ptr;
+		out_buf.bufs = (void**) &outbuf;
 		out_buf.bufferIdentifiers = &out_identifier;
 		out_buf.bufSizes = &out_size;
 		out_buf.bufElSizes = &out_elem_size;
-
-		if ((err = aacEncEncode(handle, &in_buf, &out_buf, &in_args, &out_args)) != AACENC_OK) {
+		
+		err = aacEncEncode(handle, &in_buf, &out_buf, &in_args, &out_args);
+		if (err != AACENC_OK) {
 			// error
 			if (err != AACENC_ENCODE_EOF) {
-				LOG_FDK(FDKError,"Encoding failed\n");
+				LOG_FDK(FDKError,"Encoding failed: %s\n", setupErrorText(err));
 				return 0;
 			}
 		}
@@ -232,18 +228,11 @@ public:
 	void end(){
 		LOG_FDK(FDKDebug,__FUNCTION__);
 		active = false;
-		if (input_buf!=nullptr)
-			delete []input_buf;
-		input_buf = nullptr;
-
-		if (convert_buf!=nullptr)
-			delete []convert_buf;
-		convert_buf = nullptr;
 
 		if (outbuf!=nullptr){
 			delete []outbuf;
+			outbuf=nullptr;
 		}
-		outbuf=nullptr;
 
 		aacEncClose(&handle);
 	}
@@ -264,17 +253,15 @@ public:
 
 protected:
 	// common variables
-	int vbr = 0;
-	int bitrate = 64000;
+	int vbr = 1; // variable bitrate mode
+	int bitrate = 0; // automatic determination
 	int ch = 0;
 	const char *infile;
 	void *wav;
 	int format, sample_rate, channels=2, bits_per_sample;
 	int input_size;
-	uint8_t* input_buf = nullptr;
-	int16_t* convert_buf = nullptr;
 	int aot = 2;
-	bool afterburner = true;
+	bool afterburner = false;
 	int eld_sbr = 0;
 	HANDLE_AACENCODER handle;
 	CHANNEL_MODE mode;
@@ -287,13 +274,14 @@ protected:
 	int in_elem_size;
 	int out_identifier = OUT_BITSTREAM_DATA;
 	int out_elem_size;
-	void *in_ptr, *out_ptr;
-	uint8_t* outbuf;
-	int out_size = 2048;
+	uint8_t* outbuf = nullptr;
+	int out_size = 1024;
 	AACENC_ERROR err;
-	bool active;
+	bool active = false;
 	AACCallbackFDK aacCallback=nullptr;
-	UINT encModules=1;
+	UINT encModules = 0x01; 
+	UINT openEncModules = 0; 
+	int openChannels = 0;
 
 #ifdef ARDUINO
 	Print *out;
@@ -302,7 +290,9 @@ protected:
 	/// starts the processing
 	bool setup() {
 		LOG_FDK(FDKDebug,__FUNCTION__);
+		AACENC_ERROR rc = AACENC_OK;
 
+		// determine mode
 		switch (channels) {
 		case 1: mode = MODE_1;       break;
 		case 2: mode = MODE_2;       break;
@@ -314,42 +304,58 @@ protected:
 			LOG_FDK(FDKError,"Unsupported WAV channels\n");
 			return false;
 		}
-		AACENC_ERROR rc = aacEncOpen(&handle, 0, channels);
-		if (rc != AACENC_OK) {
-			LOG_FDK(FDKError,"Unable to open encoder: %s\n",setupErrorText(rc));
-			return false;
+
+		// reopen encoder if modules or channels have changed
+		if (active && (channels>openChannels || openEncModules!=encModules)){
+			LOG_FDK(FDKWarning,"Basic Info has changed: we reopen the encoder\n");
+			rc = aacEncClose(&handle);
+			if (rc != AACENC_OK) {
+				LOG_FDK(FDKError,"Unable to close encoder: %s\n",setupErrorText(rc));
+			} 
+			active = false;
 		}
 
-		if (updateParams()<0) {
-			LOG_FDK(FDKError,"Unable to update parameters\n");
-			return false;
-		}
+		// open only once !
+		if (!active) {
+			LOG_FDK(FDKInfo,"aacEncOpen\n");
+			rc = aacEncOpen(&handle, encModules, channels);
 
-		if (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {
-			LOG_FDK(FDKError,"Unable to initialize the encoder\n");
-			return false;
-		}
+			if (rc != AACENC_OK) {
+				LOG_FDK(FDKError,"Unable to open encoder: %s\n",setupErrorText(rc));
+				return false;
+			} 
+			// record open channels and modules
+			openChannels = channels;
+			openEncModules = encModules;
 
-		if (aacEncInfo(handle, &info) != AACENC_OK) {
-			LOG_FDK(FDKError,"Unable to get the encoder info\n");
-			return false;
-		}
+			if (updateParams()<0) {
+				LOG_FDK(FDKError,"Unable to update parameters\n");
+				return false;
+			}
 
-		input_size = channels*2*info.frameLength;
-		input_buf = new uint8_t[input_size];
-		if (input_buf==nullptr){
-			LOG_FDK(FDKError,"Unable to allocate memory for input buffer\n");
-			return false;
-		}
-		convert_buf = new int16_t[input_size];
-		if (convert_buf==nullptr){
-			LOG_FDK(FDKError,"Unable to allocate memory for convert buffer\n");
-			return false;
-		}
-		outbuf = new uint8_t[out_size];
-		if (outbuf==nullptr){
-			LOG_FDK(FDKError,"Unable to allocate memory for output buffer\n");
-			return false;
+			if (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {
+				LOG_FDK(FDKError,"Unable to initialize the encoder\n");
+				return false;
+			}
+
+			if (aacEncInfo(handle, &info) != AACENC_OK) {
+				LOG_FDK(FDKError,"Unable to get the encoder info\n");
+				return false;
+			}
+
+			if (outbuf!=nullptr){
+				outbuf = new uint8_t[out_size];
+				if (outbuf==nullptr){
+					LOG_FDK(FDKError,"Unable to allocate memory for output buffer\n");
+					return false;
+				}
+			}
+		} else {
+			// we might need to update the parameters
+			if (updateParams()<0) {
+				LOG_FDK(FDKError,"Unable to update parameters\n");
+				return false;
+			}
 		}
 
 		active = true;
@@ -361,12 +367,12 @@ protected:
 		LOG_FDK(FDKDebug,__FUNCTION__);
 
 		if (setParameter(AACENC_AOT, aot) != AACENC_OK) {
-			LOG_FDK(FDKError,"Unable to set the AOT\n");
+			LOG_FDK(FDKError,"Unable to set the AOT (Audio Object Type)\n");
 			return -1;
 		}
 		if (aot == 39 && eld_sbr) {
 			if (setParameter(AACENC_SBR_MODE, 1) != AACENC_OK) {
-				LOG_FDK(FDKError,"Unable to set SBR mode for ELD\n");
+				LOG_FDK(FDKError,"Unable to set SBR (Spectral Band Replication) mode for ELD\n");
 				return -1;
 			}
 		}
@@ -388,9 +394,11 @@ protected:
 				return -1;
 			}
 		} else {
-			if (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {
-				LOG_FDK(FDKError,"Unable to set the bitrate\n");
-				return -1;
+			if (bitrate>0) {
+				if (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {
+					LOG_FDK(FDKError,"Unable to set the bitrate\n");
+					return -1;
+				}
 			}
 		}
 		if (setParameter(AACENC_TRANSMUX, TT_MP4_ADTS) != AACENC_OK) {
@@ -421,7 +429,8 @@ protected:
 		}
 	} 
 
-	void setEncModule(UINT encModules){
+	/// Specify encoder modules to be supported in this encoder  (0x01: AAC module,0x02: SBR module,0x04: PS module,0x10: Metadata module). E.g. (0x01|0x02|0x04|0x10) - Use 0 for all modules
+	void setEncoderModules(UINT encModules){
 		this->encModules = encModules;
 	}
 
