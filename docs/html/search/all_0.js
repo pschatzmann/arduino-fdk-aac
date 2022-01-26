@@ -22,7 +22,7 @@ var searchData=
   ['aac_5funidrc_5falbum_5fmode_19',['AAC_UNIDRC_ALBUM_MODE',['../namespaceaac__fdk.html#a418a271f19e3b10156f92bc22288bbaeaa8f8095a411905b9e9149d65af5c0575',1,'aac_fdk']]],
   ['aac_5funidrc_5fset_5feffect_20',['AAC_UNIDRC_SET_EFFECT',['../namespaceaac__fdk.html#a418a271f19e3b10156f92bc22288bbaea4fb25a8fdf06b93686a63104e443524e',1,'aac_fdk']]],
   ['aacdec_5fparam_21',['AACDEC_PARAM',['../namespaceaac__fdk.html#a418a271f19e3b10156f92bc22288bbae',1,'aac_fdk']]],
-  ['aacdecoderfdk_22',['AACDecoderFDK',['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html',1,'aac_fdk::AACDecoderFDK'],['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a93d96e7403aa314c67c26bce6f6071bd',1,'aac_fdk::AACDecoderFDK::AACDecoderFDK(int output_buffer_size=2048)'],['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a50eb9ec47b72f7e251f53ae9d787b6c7',1,'aac_fdk::AACDecoderFDK::AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048)']]],
+  ['aacdecoderfdk_22',['AACDecoderFDK',['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html',1,'aac_fdk::AACDecoderFDK'],['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a50eb9ec47b72f7e251f53ae9d787b6c7',1,'aac_fdk::AACDecoderFDK::AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048)'],['../classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a93d96e7403aa314c67c26bce6f6071bd',1,'aac_fdk::AACDecoderFDK::AACDecoderFDK(int output_buffer_size=2048)']]],
   ['aacenc_5fafterburner_23',['AACENC_AFTERBURNER',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46afc9ecda755c5a31272a40b53cd877ed5',1,'aac_fdk']]],
   ['aacenc_5fancillary_5fbitrate_24',['AACENC_ANCILLARY_BITRATE',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46a61433a6f8059bb4a511bbe0eb6986697',1,'aac_fdk']]],
   ['aacenc_5faot_25',['AACENC_AOT',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46a04e7658db5b070f79ee93e2c498d39ee',1,'aac_fdk']]],
@@ -46,7 +46,7 @@ var searchData=
   ['aacenc_5fsignaling_5fmode_43',['AACENC_SIGNALING_MODE',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46a7b59c3e9fe4cae5af7baa9eea4ce7ea5',1,'aac_fdk']]],
   ['aacenc_5ftpsubframes_44',['AACENC_TPSUBFRAMES',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46a9889dac3effef6ae098cf97429be71a4',1,'aac_fdk']]],
   ['aacenc_5ftransmux_45',['AACENC_TRANSMUX',['../namespaceaac__fdk.html#a89203346d61af32bc4db4f704267ce46a2cc84c370b2f6094d532e9012097a953',1,'aac_fdk']]],
-  ['aacencoderfdk_46',['AACEncoderFDK',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html',1,'aac_fdk']]],
+  ['aacencoderfdk_46',['AACEncoderFDK',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html',1,'aac_fdk::AACEncoderFDK'],['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a8d9ee9cbbe3120211118ef65211826ff',1,'aac_fdk::AACEncoderFDK::AACEncoderFDK()'],['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a577d3943d1de0c0e0dd6145850dbc73f',1,'aac_fdk::AACEncoderFDK::AACEncoderFDK(AACCallbackFDK cb)']]],
   ['arduino_20aac_20encoding_20and_20decoding_20library_47',['Arduino AAC Encoding and Decoding Library',['../index.html',1,'']]],
   ['audioinfo_48',['AudioInfo',['../structaac__fdk_1_1_audio_info.html',1,'aac_fdk']]]
 ];

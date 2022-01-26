@@ -25,16 +25,18 @@ struct AudioInfo  {
 class AACEncoderFDK  {
 
 public:
-
+	/// Empty Constructor. 
 	AACEncoderFDK(){
 	}
 
-	 ~AACEncoderFDK(){
-		 end();
-	 }
-
+	/// Default constructor
 	AACEncoderFDK(AACCallbackFDK cb){
         setDataCallback(cb);
+	}
+
+	/// Destructor
+	~AACEncoderFDK(){
+		 end();
 	}
 
 
@@ -371,7 +373,7 @@ protected:
 		return true;
 	}
 	
-
+	/// Updates all parameters with the values defined by the setter methods
 	int updateParams() {
 		LOG_FDK(FDKDebug,__FUNCTION__);
 

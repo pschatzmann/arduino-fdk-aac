@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_106',['write',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#a9097b0704f2cc29b7fac4d53991ae04d',1,'aac_fdk::AACEncoderFDK']]]
+  ['updateparams_109',['updateParams',['../classaac__fdk_1_1_a_a_c_encoder_f_d_k.html#acc4749b8560dbc95aeed2ca2ec4d78a1',1,'aac_fdk::AACEncoderFDK']]]
 ];
