@@ -43,6 +43,7 @@ public:
 	AACEncoderFDK(Stream &out_stream){
 		this->out = &out_stream;
 	}
+
 	/// Defines the output stream
 	void setOutput(Print &out_stream){
 		this->out = &out_stream;
@@ -50,20 +51,24 @@ public:
 
 #endif
 
+	/// Defines the callback method
 	void setDataCallback(AACCallbackFDK cb){
 		this->aacCallback = cb;
 	}
 
-	/** @brief Total encoder bitrate. This parameter is	
+	/** 
+	 * @brief Total encoder bitrate. This parameter is	
 				mandatory and interacts with ::AACENC_BITRATEMODE.
 				- CBR: Bitrate in bits/second.
 				- VBR: Variable bitrate. Bitrate argument will
-				be ignored. See \ref suppBitrates for details. */	
+				be ignored. See \ref suppBitrates for details. 
+	*/	
 	void setBitrate(int bitrate){
 		this->bitrate = bitrate;
 	}
 
-	/** @brief  Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
+	/** 
+	 * @brief  Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
                    - 2: MPEG-4 AAC Low Complexity.
                    - 5: MPEG-4 AAC Low Complexity with Spectral Band Replication
                  (HE-AAC).
@@ -83,12 +88,14 @@ public:
                    Please note that the  MPEG-2 AOT's basically disables
                  non-existing Perceptual Noise Substitution tool in AAC encoder
                  and controls the MPEG_ID flag in adts header. The 
-                 MPEG-2 AOT doesn't prohibit specific transport formats. */
+                 MPEG-2 AOT doesn't prohibit specific transport formats. 
+			*/
 	void setAudioObjectType(int aot){
 		this->aot = aot;
 	}
 
-	/** @brief  This parameter controls the use of the afterburner feature.
+	/** 
+	 * @brief  This parameter controls the use of the afterburner feature.
                    The afterburner is a type of analysis by synthesis algorithm
                  which increases the audio quality but also the required
                  processing power. It is recommended to always activate this if
@@ -98,12 +105,14 @@ public:
                  need to be evaluated against the improvement in audio quality
                  on a case by case basis.
                    - 0: Disable afterburner (default).
-                   - 1: Enable afterburner. */
+                   - 1: Enable afterburner. 
+			*/
 	void setAfterburner(bool afterburner){
 		this->afterburner = afterburner;
 	}
 
-	/** @brief  Configure SBR independently of the chosen Audio
+	/** 
+	 * @brief  Configure SBR independently of the chosen Audio
 				Object Type ::AUDIO_OBJECT_TYPE. This parameter
 				is for ELD audio object type only.
 					- -1: Use ELD SBR auto configurator (default).
@@ -113,7 +122,8 @@ public:
 		this->eld_sbr = eld_sbr;
 	}
 
- 	/** @brief  Bitrate mode. Configuration can be different
+ 	/** 
+	  * @brief  Bitrate mode. Configuration can be different
 				kind of bitrate configurations:
 				- 0: Constant bitrate, use bitrate according
 				to ::AACENC_BITRATE. (default) Within none
@@ -130,7 +140,8 @@ public:
 				- 4: Variable bitrate mode, \ref vbrmode
 				"high bitrate".
 				- 5: Variable bitrate mode, \ref vbrmode
-				"very high bitrate". */	
+				"very high bitrate". 
+		*/	
 	void setVariableBitrateMode(int vbr){
 		this->vbr = vbr;
 	}
