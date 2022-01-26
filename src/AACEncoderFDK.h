@@ -54,7 +54,7 @@ public:
 		this->aacCallback = cb;
 	}
 
-	/*!< Total encoder bitrate. This parameter is	
+	/** @brief Total encoder bitrate. This parameter is	
 				mandatory and interacts with ::AACENC_BITRATEMODE.
 				- CBR: Bitrate in bits/second.
 				- VBR: Variable bitrate. Bitrate argument will
@@ -63,7 +63,7 @@ public:
 		this->bitrate = bitrate;
 	}
 
-	/*!< Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
+	/** @brief  Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
                    - 2: MPEG-4 AAC Low Complexity.
                    - 5: MPEG-4 AAC Low Complexity with Spectral Band Replication
                  (HE-AAC).
@@ -88,7 +88,7 @@ public:
 		this->aot = aot;
 	}
 
-	/*!< This parameter controls the use of the afterburner feature.
+	/** @brief  This parameter controls the use of the afterburner feature.
                    The afterburner is a type of analysis by synthesis algorithm
                  which increases the audio quality but also the required
                  processing power. It is recommended to always activate this if
@@ -103,7 +103,7 @@ public:
 		this->afterburner = afterburner;
 	}
 
-	/*!< Configure SBR independently of the chosen Audio
+	/** @brief  Configure SBR independently of the chosen Audio
 				Object Type ::AUDIO_OBJECT_TYPE. This parameter
 				is for ELD audio object type only.
 					- -1: Use ELD SBR auto configurator (default).
@@ -113,7 +113,7 @@ public:
 		this->eld_sbr = eld_sbr;
 	}
 
- 	/*!< Bitrate mode. Configuration can be different
+ 	/** @brief  Bitrate mode. Configuration can be different
 				kind of bitrate configurations:
 				- 0: Constant bitrate, use bitrate according
 				to ::AACENC_BITRATE. (default) Within none
@@ -253,13 +253,10 @@ public:
 
 protected:
 	// common variables
-	int vbr = 1; // variable bitrate mode
+	int vbr = 0; // variable bitrate mode
 	int bitrate = 0; // automatic determination
 	int ch = 0;
-	const char *infile;
-	void *wav;
 	int format, sample_rate, channels=2, bits_per_sample;
-	int input_size;
 	int aot = 2;
 	bool afterburner = false;
 	int eld_sbr = 0;
@@ -273,15 +270,16 @@ protected:
 	int in_identifier = IN_AUDIO_DATA;
 	int in_elem_size;
 	int out_identifier = OUT_BITSTREAM_DATA;
-	int out_elem_size;
+	int out_elem_size=1;
 	uint8_t* outbuf = nullptr;
-	int out_size = 1024;
+	int out_size = 2048;
 	AACENC_ERROR err;
 	bool active = false;
 	AACCallbackFDK aacCallback=nullptr;
 	UINT encModules = 0x01; 
 	UINT openEncModules = 0; 
 	int openChannels = 0;
+	int sce=0, cpe=0; // for bitrate determination
 
 #ifdef ARDUINO
 	Print *out;
@@ -294,12 +292,12 @@ protected:
 
 		// determine mode
 		switch (channels) {
-		case 1: mode = MODE_1;       break;
-		case 2: mode = MODE_2;       break;
-		case 3: mode = MODE_1_2;     break;
-		case 4: mode = MODE_1_2_1;   break;
-		case 5: mode = MODE_1_2_2;   break;
-		case 6: mode = MODE_1_2_2_1; break;
+		case 1: mode = MODE_1;       sce = 1; cpe = 0; break;
+		case 2: mode = MODE_2;       sce = 0; cpe = 1; break;
+		case 3: mode = MODE_1_2;     sce = 1; cpe = 1; break;
+		case 4: mode = MODE_1_2_1;   sce = 2; cpe = 1; break;
+		case 5: mode = MODE_1_2_2;   sce = 1; cpe = 2; break;
+		case 6: mode = MODE_1_2_2_1; sce = 2; cpe = 2; break;
 		default:
 			LOG_FDK(FDKError,"Unsupported WAV channels\n");
 			return false;
@@ -388,12 +386,26 @@ protected:
 			LOG_FDK(FDKError,"Unable to set the wav channel order\n");
 			return -1;
 		}
+
 		if (vbr) {
 			if (setParameter(AACENC_BITRATEMODE, vbr) != AACENC_OK) {
 				LOG_FDK(FDKError,"Unable to set the VBR bitrate mode\n");
 				return -1;
 			}
 		} else {
+			// determine bitrate
+			if (bitrate<=0){
+			   if (aot==29){
+					sce = 1;
+  					cpe = 0;
+			   }	
+               bitrate = (96*sce + 128*cpe) * sample_rate / 44;
+               if (aot==5 || aot== 29 || aot==132 || eld_sbr){
+                   bitrate /= 2;
+               }
+				LOG_FDK(FDKWarning,"Determined bitrate: %d for sample rate %d\n", bitrate, sample_rate);
+			}
+
 			if (bitrate>0) {
 				if (setParameter(AACENC_BITRATE, bitrate) != AACENC_OK) {
 					LOG_FDK(FDKError,"Unable to set the bitrate\n");

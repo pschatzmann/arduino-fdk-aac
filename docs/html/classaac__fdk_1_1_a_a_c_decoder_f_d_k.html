@@ -88,13 +88,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50eb9ec47b72f7e251f53ae9d787b6c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a50eb9ec47b72f7e251f53ae9d787b6c7">AACDecoderFDK</a> (AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048)</td></tr>
 <tr class="memdesc:a50eb9ec47b72f7e251f53ae9d787b6c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaac__fdk_1_1_a_a_c_decoder_f_d_k.html" title="Audio Decoder which decodes AAC into a PCM stream.">AACDecoderFDK</a> object.  <a href="classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a50eb9ec47b72f7e251f53ae9d787b6c7">More...</a><br /></td></tr>
 <tr class="separator:a50eb9ec47b72f7e251f53ae9d787b6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd133c999581ac088d43413d9ffa2148"><td class="memItemLeft" align="right" valign="top"><a id="afd133c999581ac088d43413d9ffa2148"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AACDecoderFDK</b> (Stream &amp;out_stream, int output_buffer_size=2048)</td></tr>
-<tr class="separator:afd133c999581ac088d43413d9ffa2148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a024569eb041a55ca2771d03cc743c312"><td class="memItemLeft" align="right" valign="top"><a id="a024569eb041a55ca2771d03cc743c312"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a024569eb041a55ca2771d03cc743c312">setStream</a> (Stream &amp;out_stream)</td></tr>
-<tr class="memdesc:a024569eb041a55ca2771d03cc743c312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output stream. <br /></td></tr>
-<tr class="separator:a024569eb041a55ca2771d03cc743c312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab501ad6c04e18daf3ba7c2a3b96d2c52"><td class="memItemLeft" align="right" valign="top"><a id="ab501ad6c04e18daf3ba7c2a3b96d2c52"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AACDecoderFDK</b> (Print &amp;out_stream, int output_buffer_size=2048)</td></tr>
+<tr class="separator:ab501ad6c04e18daf3ba7c2a3b96d2c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a295d7ac2f02b9dea16cfdba60de65bc3"><td class="memItemLeft" align="right" valign="top"><a id="a295d7ac2f02b9dea16cfdba60de65bc3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaac__fdk_1_1_a_a_c_decoder_f_d_k.html#a295d7ac2f02b9dea16cfdba60de65bc3">setOutput</a> (Print &amp;out_stream)</td></tr>
+<tr class="memdesc:a295d7ac2f02b9dea16cfdba60de65bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output stream. <br /></td></tr>
+<tr class="separator:a295d7ac2f02b9dea16cfdba60de65bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2080bfdd65e939c88b1156beace17d16"><td class="memItemLeft" align="right" valign="top"><a id="a2080bfdd65e939c88b1156beace17d16"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setInfoCallback</b> (AACInfoCallbackFDK cb)</td></tr>
 <tr class="separator:a2080bfdd65e939c88b1156beace17d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,9 +121,9 @@ AAC_DECODER_ERROR&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 <tr class="memitem:a71b21ce904154ea05b74658269a5ee0c"><td class="memItemLeft" align="right" valign="top"><a id="a71b21ce904154ea05b74658269a5ee0c"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *in_ptr, size_t in_size)</td></tr>
 <tr class="separator:a71b21ce904154ea05b74658269a5ee0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace8e1dd0e0361949e75b4d0e2ae20f04"><td class="memItemLeft" align="right" valign="top"><a id="ace8e1dd0e0361949e75b4d0e2ae20f04"></a>
-CStreamInfo &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
-<tr class="separator:ace8e1dd0e0361949e75b4d0e2ae20f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4786b62bf5dd27d77b0ec3d874ff6c2"><td class="memItemLeft" align="right" valign="top"><a id="af4786b62bf5dd27d77b0ec3d874ff6c2"></a>
+CStreamInfo&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
+<tr class="separator:af4786b62bf5dd27d77b0ec3d874ff6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacb7691b1370d52aadd8e914936f5531"><td class="memItemLeft" align="right" valign="top"><a id="aacb7691b1370d52aadd8e914936f5531"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:aacb7691b1370d52aadd8e914936f5531"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,9 +171,9 @@ AACInfoCallbackFDK&#160;</td><td class="memItemRight" valign="bottom"><b>infoCal
 <tr class="memitem:a313e2ad49c3a2e76fc802d6b22912405"><td class="memItemLeft" align="right" valign="top"><a id="a313e2ad49c3a2e76fc802d6b22912405"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>decoder_flags</b> = 0</td></tr>
 <tr class="separator:a313e2ad49c3a2e76fc802d6b22912405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f22671e71cffc06217fc23ee6e1b620"><td class="memItemLeft" align="right" valign="top"><a id="a4f22671e71cffc06217fc23ee6e1b620"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>out</b> = nullptr</td></tr>
-<tr class="separator:a4f22671e71cffc06217fc23ee6e1b620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffed61c3bce4f1bc8ea996a9efdc1de"><td class="memItemLeft" align="right" valign="top"><a id="a1ffed61c3bce4f1bc8ea996a9efdc1de"></a>
+Print *&#160;</td><td class="memItemRight" valign="bottom"><b>out</b> = nullptr</td></tr>
+<tr class="separator:a1ffed61c3bce4f1bc8ea996a9efdc1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Audio Decoder which decodes AAC into a PCM stream. </p>

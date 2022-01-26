@@ -136,12 +136,21 @@ Encoding Example</h1>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Installation</h1>
-<p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
+<p>For Arduino, you can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-fdk-aac.git</div>
+</div><!-- fragment --><p>This project can also be built and executed on your desktop with cmake:</p>
+<div class="fragment"><div class="line">cd arduino-fdk-aac</div>
+<div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake ..</div>
+<div class="line">make</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Class Documentation</h1>
-<p>The <a href="https://pschatzmann.github.io/arduino-fdk-aac/html/">generated class documentation</a> can be found here.</p>
+<ul>
+<li>The <a href="https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html">generated Class Documentation</a> can be found here.</li>
+<li>I also suggest that you have a look at <a href="https://www.pschatzmann.ch/home/2021/08/13/audio-decoders-for-microcontrollers/">my related Blog</a></li>
+</ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Compile Issues / Supported Architectures</h1>
 <p>On some processors we get compile errors because the arrays are too big. <br  />
