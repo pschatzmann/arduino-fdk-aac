@@ -127,6 +127,7 @@ amm-info@iis.fraunhofer.de
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
+#include "fdk_log.h"
 
 /***************************************************************
  * memory allocation monitoring variables
@@ -206,9 +207,9 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
     } else {
        ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
     }
-	  printf("==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]\n", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
-	  if (!ptr) {
-		  printf("Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]\n", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
+	  LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]\n", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
+	  if (ptr==nullptr) {
+		  LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]\n", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
 	  }
 	  return ptr;
 	}
@@ -223,6 +224,10 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 	  void *ptr;
 
 	  ptr = calloc(n, size);
+	  LOG_FDK(FDKInfo, "==> calloc(%d,%d) -> %p", n, size, ptr);
+	  if (ptr==nullptr) {
+	    LOG_FDK(FDKError, "Memory allocations error!!! calloc(%d,%d) -> %p", n, size, ptr);
+	  }
 
 	  return ptr;
 	}
@@ -233,6 +238,10 @@ void *FDKmalloc(const UINT size) {
   void *ptr;
 
   ptr = malloc(size);
+	LOG_FDK(FDKInfo, "==> malloc(%d) -> %p", size, ptr);
+	if (ptr==nullptr) {
+	  LOG_FDK(FDKError, "Memory allocations error!!! malloc(%d) -> %p", size, ptr);
+	}
 
   return ptr;
 }
