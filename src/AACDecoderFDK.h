@@ -25,7 +25,6 @@ class AACDecoderFDK  {
         AACDecoderFDK(int output_buffer_size=2048){
         	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
-            this->output_buffer = new INT_PCM[output_buffer_size];
 		}
 
 		/**
@@ -37,17 +36,21 @@ class AACDecoderFDK  {
 		 */
         AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048){
             this->output_buffer_size = output_buffer_size;
-            this->output_buffer = new INT_PCM[output_buffer_size];
             setDataCallback(dataCallback);
             setInfoCallback(infoCallback);
         }
 
 #ifdef ARDUINO
 
+		/**
+		 * @brief Construct a new AACDecoderFDK object
+		 * 
+		 * @param out_stream 
+		 * @param output_buffer_size 
+		 */
         AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
         	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
-            this->output_buffer = new INT_PCM[output_buffer_size];
 			setOutput(out_stream);
         }
 
@@ -105,10 +108,18 @@ class AACDecoderFDK  {
         // opens the decoder
         void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
 			LOG_FDK(FDKDebug,__FUNCTION__);
-            aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
-			if (aacDecoderInfo==NULL){
-				LOG_FDK(FDKError,"aacDecoder_Open -> Error");
-				return;
+			// allocate buffer only once
+			if (output_buffer==nullptr){
+				output_buffer = new INT_PCM[output_buffer_size];
+			}
+
+			// call aacDecoder_Open only once
+			if (aacDecoderInfo==nullptr){ 
+				aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
+				if (aacDecoderInfo==NULL){
+					LOG_FDK(FDKError,"aacDecoder_Open -> Error");
+					return;
+				}
 			}
 
 			// if we decode 1 channel aac files we return output to 2 channels
@@ -163,13 +174,14 @@ class AACDecoderFDK  {
 			is_open = false;
         }
 
+	   /// returns true if the decoder is open
        virtual operator boolean() {
 		   return is_open;
 	   }
 
     protected:
 		bool is_cleanup_stream = false;
-        HANDLE_AACDECODER aacDecoderInfo;
+        HANDLE_AACDECODER aacDecoderInfo = nullptr;
         int output_buffer_size = 0;
         INT_PCM* output_buffer = nullptr;
 		bool is_open = false;
