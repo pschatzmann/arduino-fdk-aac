@@ -12,7 +12,9 @@
 // Logging Implementation
 #if FDK_LOGGING_ACTIVE == true
 
-#ifndef ARDUINO
+#ifdef ARDUINO
+#include <Arduino.h>
+#else
 #include <stdio.h>
 #endif
 
