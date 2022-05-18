@@ -120,7 +120,7 @@ make
 On some processors we get compile errors because the arrays are too big.  
 Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file. 
 
-All examples have been written and tested on a ESP32. The basic funcationality of the encoder and decoder however should work on all Arduino Devices and is independent from the processor.
+The encoder is woring on an  ESP32, the decoder however needs to much RAM and I did not find any way to improve the situation!
 
 ## Copyright
 
