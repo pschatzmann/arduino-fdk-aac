@@ -95,7 +95,7 @@ For Arduino, you can download the library as zip and call include Library -> zip
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone pschatzmann/arduino-fdk-aac.git
+git clone https://github.com/pschatzmann/arduino-fdk-aac.git
 ```
 
 This project can also be built and executed on your desktop with cmake:
