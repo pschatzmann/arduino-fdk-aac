@@ -14,7 +14,6 @@
 
 using namespace aac_fdk;
 
-
 void dataCallback(CStreamInfo &info, INT_PCM *pcm_data, size_t len) {
     int channels = info.numChannels;
     for (size_t i=0; i<len; i+=channels){
@@ -30,7 +29,11 @@ AACDecoderFDK aac(dataCallback);
 
 void setup() {
     Serial.begin(115200);
-    aac.begin();
+    LOGLEVEL_FDK = FDKDebug;
+    if (!aac.begin()){
+        Serial.println("aac.begin() failed");
+        stop();
+    }
 }
 
 void loop() {

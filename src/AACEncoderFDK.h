@@ -173,9 +173,9 @@ public:
 	 * @brief Opens the encoder - Please call setAudioInfo before
 	 * 
 	 */
-	 void begin() {
+	 bool begin() {
 		LOG_FDK(FDKDebug,__FUNCTION__);
-		setup();
+		return setup();
 	}
 
 	/**
@@ -184,10 +184,10 @@ public:
 	 * @param info 
 	 * @return int 
 	 */
-	 void begin(AudioInfo  info) {
+	 bool begin(AudioInfo  info) {
 		LOG_FDK(FDKDebug,__FUNCTION__);
 		setAudioInfo(info);
-		setup();
+		return setup();
 	}
 
 	/**

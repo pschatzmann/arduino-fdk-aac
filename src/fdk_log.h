@@ -2,16 +2,17 @@
 
 // User Settings: Activate/Deactivate logging
 #ifndef FDK_LOGGING_ACTIVE
-#define FDK_LOGGING_ACTIVE true
+#  define FDK_LOGGING_ACTIVE true
 #endif
 
 #ifndef FDK_LOG_LEVEL
-#define FDK_LOG_LEVEL FDKWarning
+#  define FDK_LOG_LEVEL FDKWarning
 #endif
 
 // Logging Implementation
 #if FDK_LOGGING_ACTIVE == true
 
+#include <string.h>
 #ifdef ARDUINO
 #include <Arduino.h>
 #else
@@ -21,7 +22,7 @@
 static const int log_buffer_size = 160;
 static char log_buffer[log_buffer_size];
 enum LogLevelFDK {FDKDebug, FDKInfo, FDKWarning, FDKError};
-static LogLevelFDK LOGLEVEL_FDK = FDK_LOG_LEVEL;
+extern LogLevelFDK LOGLEVEL_FDK;
 
 static const char* levelName(LogLevelFDK level) {
     switch(level){

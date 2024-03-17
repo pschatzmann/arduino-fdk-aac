@@ -106,26 +106,35 @@ class AACDecoderFDK  {
 		}
 
         // opens the decoder
-        void begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
+        bool begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
 			LOG_FDK(FDKDebug,__FUNCTION__);
-			// allocate buffer only once
-			if (output_buffer==nullptr){
-				output_buffer = (INT_PCM*) FDKcalloc(output_buffer_size, sizeof(INT_PCM));
-			}
 
 			// call aacDecoder_Open only once
-			if (aacDecoderInfo==nullptr){ 
+			if (aacDecoderInfo == nullptr){ 
+				LOG_FDK(FDKDebug,__FUNCTION__);
 				aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
-				if (aacDecoderInfo==NULL){
+				//assert(aacDecoderInfo!=nullptr);
+				if (aacDecoderInfo == nullptr){
 					LOG_FDK(FDKError,"aacDecoder_Open -> Error");
-					return;
+					return false;
 				}
+			}
+
+			// allocate buffer only once
+			if (output_buffer == nullptr){
+				LOG_FDK(FDKDebug,__FUNCTION__);
+				output_buffer = (INT_PCM*) FDKcalloc(output_buffer_size, sizeof(INT_PCM));
+				assert(output_buffer != nullptr);
+				if (output_buffer == nullptr){
+					LOG_FDK(FDKError,"aacDecoder_Open -> Error");
+					return false;
+				} 
 			}
 
 			// if we decode 1 channel aac files we return output to 2 channels
 			aacDecoder_SetParam(aacDecoderInfo, AAC_PCM_MIN_OUTPUT_CHANNELS, 2);
 			is_open = true;
-            return;
+            return true;
         }
 
         /**
@@ -139,8 +148,9 @@ class AACDecoderFDK  {
             return aacDecoder_ConfigRaw (aacDecoderInfo, &conf, &length );
         }
 
-        // write AAC data to be converted to PCM data - we feed the decoder witch batches of max 1k
+        // write AAC data to be converted to PCM data - we feed the decoder whitch batches of max 1k
       	virtual size_t write(const void *in_ptr, size_t in_size) {
+			if (aacDecoderInfo==nullptr) return 0;
 			LOG_FDK(FDKDebug,"write %zu bytes", in_size);
 			uint8_t *byte_ptr = (uint8_t *)in_ptr;
 			size_t open = in_size;
@@ -188,7 +198,7 @@ class AACDecoderFDK  {
 		CStreamInfo aacFrameInfo;
         AACDataCallbackFDK pwmCallback = nullptr;
         AACInfoCallbackFDK infoCallback = nullptr;
-		int decoder_flags = 0;
+		int decoder_flags = AACDEC_INTR;
 
 #ifdef ARDUINO
         Print *out = nullptr;
@@ -196,34 +206,31 @@ class AACDecoderFDK  {
 
 		/// decodes the data
       	virtual size_t decode(const void *in_ptr, UINT in_size) {
-			LOG_FDK(FDKDebug,"write %zu bytes", in_size);
+			LOG_FDK(FDKDebug,"decode %u bytes", in_size);
 			size_t result = 0;
 			UINT inSize = in_size;
+			UINT bytesValid = in_size;
 			
 			AAC_DECODER_ERROR error; 
 			if (aacDecoderInfo!=nullptr) {
-				UINT bytesValid = in_size;
 				const void *start = in_ptr;
-				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, (const UINT*)&inSize, &bytesValid); 
+				LOG_FDK(FDKDebug,"aacDecoder_Fill %u bytes", inSize);
+				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, &inSize, &bytesValid); 
 				while (error == AAC_DEC_OK) {
+					LOG_FDK(FDKDebug,"aacDecoder_DecodeFrame");
 					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, decoder_flags); 
 					// write pcm to output stream
 					if (error == AAC_DEC_OK){
+						LOG_FDK(FDKDebug,"provideResult %d", output_buffer_size);
 						provideResult(output_buffer, output_buffer_size);
 					} else {
-						LOG_FDK(FDKError,"Decoding error: %d",error);
-					}
-					// if not all bytes were used we process them now
-					if (bytesValid>0){
-						const uint8_t *start = static_cast<const uint8_t*>(in_ptr)+bytesValid;
-						UINT act_len = inSize - bytesValid;
-						error = aacDecoder_Fill(aacDecoderInfo, (UCHAR**) &start, &act_len, &bytesValid);
+						if (error != AAC_DEC_NOT_ENOUGH_BITS){
+							LOG_FDK(FDKError,"Decoding error: %d",error);
+						}
 					}
 				}
 			}
-			if (error == AAC_DEC_OK){
-				result = inSize;
-			}
+			result = inSize - bytesValid;
             return result;
         }
 

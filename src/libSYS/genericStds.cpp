@@ -137,6 +137,7 @@ amm-info@iis.fraunhofer.de
 
 #ifdef ESP32
  #include "esp_heap_caps.h"
+  void *ps_calloc(size_t n, size_t size);
 #endif
 
 
@@ -191,17 +192,14 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
  * DYNAMIC MEMORY management (heap)
  *************************************************************************/
 #ifdef ESP32
-  void *ps_calloc(size_t n, size_t size);
-
-	void *FDKcalloc(const UINT n, const UINT size) {
-    return FDKcallocExt(n, size, 1);
-  }
 
   // allocate memory with an optional alignment information
 	void *FDKcallocExt(const UINT n, const UINT size, const UCHAR alignment) {
+		LOG_FDK(FDKDebug,"FDKcallocExt(%d,%d,%d)", n, size, alignment);
     UCHAR alignment_effective = alignment;
-	  void *ptr = ps_calloc(n, size);
-    if (ptr==nullptr){
+	  void *ptr = nullptr;
+    ptr = ps_calloc(n, size);
+    if (ptr == nullptr){
       if (alignment%4 == 0){
         alignment_effective = 4;
         ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT); 
@@ -209,12 +207,24 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
         ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
       }
       LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
+    } else {
+      LOG_FDK(FDKInfo, "==> ps_calloc(%d, %d) -> 0x%x", n, size, ptr);
     }
-      if (ptr==nullptr) {
-        LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
-      }
+    if (ptr==nullptr) {
+      LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
+    }
 	  return ptr;
 	}
+
+	void *FDKcalloc(const UINT n, const UINT size) {
+    return FDKcallocExt(n, size, 1);
+  }
+
+  void *FDKaalloc(const UINT size, const UINT alignment) {
+    void *addr = NULL;
+    addr = FDKcallocExt(1, size, alignment); /* Malloc and clear memory. */
+    return addr; /* Return aligned address.          */
+  }
 
 #else
 
@@ -234,22 +244,6 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 	  return ptr;
 	}
 
-#endif
-
-void *FDKmalloc(const UINT size) {
-  void *ptr;
-
-  ptr = malloc(size);
-	LOG_FDK(FDKInfo, "==> malloc(%d) -> %p", size, ptr);
-	if (ptr==nullptr) {
-	  LOG_FDK(FDKError, "Memory allocations error!!! malloc(%d) -> %p", size, ptr);
-	}
-
-  return ptr;
-}
-
-void FDKfree(void *ptr) { free((INT *)ptr); }
-
 void *FDKaalloc(const UINT size, const UINT alignment) {
   void *addr, *result = NULL;
   addr = FDKcallocExt(1, size + alignment +(UINT)sizeof(void *), alignment); /* Malloc and clear memory. */
@@ -262,6 +256,22 @@ void *FDKaalloc(const UINT size, const UINT alignment) {
 
   return result; /* Return aligned address.          */
 }
+
+#endif
+
+void *FDKmalloc(const UINT size) {
+	LOG_FDK(FDKDebug,__FUNCTION__);
+  void *ptr = malloc(size);
+	LOG_FDK(FDKInfo, "==> malloc(%d) -> %p", size, ptr);
+	if (ptr==nullptr) {
+	  LOG_FDK(FDKError, "Memory allocations error!!! malloc(%d) -> %p", size, ptr);
+	}
+
+  return ptr;
+}
+
+void FDKfree(void *ptr) { free((INT *)ptr); }
+
 
 void FDKafree(void *ptr) {
   void *addr;
