@@ -32,7 +32,7 @@ void setup() {
     LOGLEVEL_FDK = FDKDebug;
     if (!aac.begin()){
         Serial.println("aac.begin() failed");
-        stop();
+        while(1);
     }
 }
 

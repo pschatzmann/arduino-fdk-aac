@@ -220,11 +220,6 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
     return FDKcallocExt(n, size, 1);
   }
 
-  void *FDKaalloc(const UINT size, const UINT alignment) {
-    void *addr = NULL;
-    addr = FDKcallocExt(1, size, alignment); /* Malloc and clear memory. */
-    return addr; /* Return aligned address.          */
-  }
 
 #else
 
@@ -244,6 +239,8 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 	  return ptr;
 	}
 
+#endif
+
 void *FDKaalloc(const UINT size, const UINT alignment) {
   void *addr, *result = NULL;
   addr = FDKcallocExt(1, size + alignment +(UINT)sizeof(void *), alignment); /* Malloc and clear memory. */
@@ -256,8 +253,6 @@ void *FDKaalloc(const UINT size, const UINT alignment) {
 
   return result; /* Return aligned address.          */
 }
-
-#endif
 
 void *FDKmalloc(const UINT size) {
 	LOG_FDK(FDKDebug,__FUNCTION__);
