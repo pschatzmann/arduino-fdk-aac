@@ -26,6 +26,7 @@ int16_t buffer[512];
 
 void setup() {
     Serial.begin(115200);
+    LOGLEVEL_FDK = FDKInfo;
 
     info.channels = 1;
     info.sample_rate = 44100;
