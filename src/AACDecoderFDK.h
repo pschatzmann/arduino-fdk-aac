@@ -110,7 +110,7 @@ class AACDecoderFDK  {
 			LOG_FDK(FDKDebug,__FUNCTION__);
 			// allocate buffer only once
 			if (output_buffer==nullptr){
-				output_buffer = new INT_PCM[output_buffer_size];
+				output_buffer = (INT_PCM*) FDKcalloc(output_buffer_size, sizeof(INT_PCM));
 			}
 
 			// call aacDecoder_Open only once
@@ -135,7 +135,7 @@ class AACDecoderFDK  {
          * LOAS, configuration is assumed to be an SMC, for all other file formats an ASC.
          * 
          **/
-        AAC_DECODER_ERROR configure(uint8_t *conf, const uint32_t &length) {
+        AAC_DECODER_ERROR configure(uint8_t *conf, const UINT &length) {
             return aacDecoder_ConfigRaw (aacDecoderInfo, &conf, &length );
         }
 
@@ -168,7 +168,7 @@ class AACDecoderFDK  {
                 aacDecoderInfo = nullptr;
             }
             if (output_buffer!=nullptr){
-                delete[] output_buffer;
+                FDKfree(output_buffer);
                 output_buffer = nullptr;
             }
 			is_open = false;
@@ -195,15 +195,16 @@ class AACDecoderFDK  {
 #endif
 
 		/// decodes the data
-      	virtual size_t decode(const void *in_ptr, size_t in_size) {
+      	virtual size_t decode(const void *in_ptr, UINT in_size) {
 			LOG_FDK(FDKDebug,"write %zu bytes", in_size);
 			size_t result = 0;
+			UINT inSize = in_size;
 			
 			AAC_DECODER_ERROR error; 
 			if (aacDecoderInfo!=nullptr) {
-				uint32_t bytesValid = in_size;
+				UINT bytesValid = in_size;
 				const void *start = in_ptr;
-				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, (const UINT*)&in_size, &bytesValid); 
+				error = aacDecoder_Fill(aacDecoderInfo, (UCHAR **)&start, (const UINT*)&inSize, &bytesValid); 
 				while (error == AAC_DEC_OK) {
 					error = aacDecoder_DecodeFrame(aacDecoderInfo, output_buffer, output_buffer_size, decoder_flags); 
 					// write pcm to output stream
@@ -215,13 +216,13 @@ class AACDecoderFDK  {
 					// if not all bytes were used we process them now
 					if (bytesValid>0){
 						const uint8_t *start = static_cast<const uint8_t*>(in_ptr)+bytesValid;
-						uint32_t act_len = in_size-bytesValid;
+						UINT act_len = inSize - bytesValid;
 						error = aacDecoder_Fill(aacDecoderInfo, (UCHAR**) &start, &act_len, &bytesValid);
 					}
 				}
 			}
 			if (error == AAC_DEC_OK){
-				result = in_size;
+				result = inSize;
 			}
             return result;
         }

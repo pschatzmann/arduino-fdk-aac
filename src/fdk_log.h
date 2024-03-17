@@ -6,7 +6,7 @@
 #endif
 
 #ifndef FDK_LOG_LEVEL
-#define FDK_LOG_LEVEL FDKInfo
+#define FDK_LOG_LEVEL FDKWarning
 #endif
 
 // Logging Implementation

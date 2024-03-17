@@ -122,7 +122,7 @@ This is just one of many __codecs__ that I have collected so far: Further detail
 On some processors we get compile errors because the arrays are too big.  
 Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file. 
 
-The encoder is woring on an  ESP32, the decoder however needs too much RAM and I did not find any way to improve the situation!
+The encoder is working on an ESP32 w/o PSRAM, the decoder however needs too much RAM, so PSRAM needs to be activated!
 
 ## Copyright
 

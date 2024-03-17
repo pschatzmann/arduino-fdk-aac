@@ -191,6 +191,7 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
  * DYNAMIC MEMORY management (heap)
  *************************************************************************/
 #ifdef ESP32
+  void *ps_calloc(size_t n, size_t size);
 
 	void *FDKcalloc(const UINT n, const UINT size) {
     return FDKcallocExt(n, size, 1);
@@ -199,18 +200,19 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
   // allocate memory with an optional alignment information
 	void *FDKcallocExt(const UINT n, const UINT size, const UCHAR alignment) {
     UCHAR alignment_effective = alignment;
-	  void *ptr=nullptr;
-//	  if (alignment%4 == 0 || size==4 || size==8 || size>20000){
-	  if (alignment%4 == 0){
-       alignment_effective = 4;
-       ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT); 
-    } else {
-       ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
+	  void *ptr = ps_calloc(n, size);
+    if (ptr==nullptr){
+      if (alignment%4 == 0){
+        alignment_effective = 4;
+        ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT); 
+      } else {
+        ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
+      }
+      LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
     }
-	  LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%x [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
-	  if (ptr==nullptr) {
-		  LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
-	  }
+      if (ptr==nullptr) {
+        LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));
+      }
 	  return ptr;
 	}
 
