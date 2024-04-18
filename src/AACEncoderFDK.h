@@ -211,7 +211,7 @@ public:
 	/// write PCM data to be converted to AAC - The size is in bytes
 	int32_t write(uint8_t *in_ptr, int in_size){
 		LOG_FDK(FDKDebug,"write %d bytes", in_size);
-		in_elem_size = 2;
+		in_elem_size = this->bits_per_sample <= 16 ? 2 : 4;
 
 		in_args.numInSamples = in_size <= 0 ? -1 : in_size / 2;
 		in_buf.numBufs = 1;
