@@ -7,8 +7,12 @@
 #define FUNCTION_fixmul_DD
 #define FUNCTION_fixmuldiv2BitExact_DD
 #define FUNCTION_fixmulBitExact_DD
+#define FUNCTION_fixpow2div2_D
+#define FUNCTION_fixpow2_D
 #define fixmuldiv2BitExact_DD(a, b) fixmuldiv2_DD(a, b)
 #define fixmulBitExact_DD(a, b) fixmul_DD(a, b)
+#define fixpow2div2_D(a) fixmuldiv2_DD(a, a)
+#define fixpow2_D(a) fixmul_DD(a, a)
 
 inline LONG fixmuldiv2_DD(const LONG a, const LONG b) {
   LONG result1 = 0;
