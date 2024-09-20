@@ -167,7 +167,7 @@ TRANSPORTDEC_ERROR adtsRead_DecodeHeader(HANDLE_ADTS pAdts,
                                          CSAudioSpecificConfig *pAsc,
                                          HANDLE_FDK_BITSTREAM hBs,
                                          const INT ignoreBufferFullness) {
-  INT crcReg;
+  INT crcReg = 0;
 
   INT valBits;
   INT cmp_buffer_fullness;

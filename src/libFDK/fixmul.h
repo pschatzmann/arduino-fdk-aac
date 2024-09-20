@@ -106,6 +106,11 @@ amm-info@iis.fraunhofer.de
 #include "libFDK/FDK_archdef.h"
 #include "libSYS/machine_type.h"
 
+
+#if defined(ESP32)
+#include "libFDK/esp32/fixmul_esp32.h"
+#endif
+
 // #if defined(__arm__)
 // #include "arm/fixmul_arm.h"
 
