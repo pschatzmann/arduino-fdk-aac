@@ -107,8 +107,8 @@ amm-info@iis.fraunhofer.de
 #include "libSYS/machine_type.h"
 
 
-#if defined(ESP32)
-#include "libFDK/esp32/fixmul_esp32.h"
+#if defined(__xtensa__)
+#include "libFDK/xtensa/fixmul_xtensa.h"
 #endif
 
 // #if defined(__arm__)
