@@ -1931,6 +1931,9 @@ INT CConcealment_TDFading(
       }
       CConcealment_TDFading_doLinearFadingSteps(&fadingSteps[0]);
       break;
+    default:
+      fadeStop = (FIXP_DBL)MAXVAL_DBL;
+      break;
   }
 
   /*
