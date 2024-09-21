@@ -5,7 +5,7 @@ I was looking for a way to encode sound PCM data to the AAC or MPEG data format 
 
 The Android-targeted implementation of the Fraunhofer AAC can be used for encoding and decoding, uses fixed-point math and is optimized for encoding on embedded devices/mobile phones. The library is currently limited to 16-bit PCM input. So this seems to be the perfect match to be used in Arduino based Microcontrollers.
 
-I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project,  converted it to an Arduino library and provided a simple Arduino friendly API. The only caveat is, that I have removed all optimized processor specific code (e.g. for ARM, 386 and mips), so that it will compile with the same code on all environements.
+I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) project,  converted it to an Arduino library and provided a simple Arduino friendly API. The only caveat is, that I have removed all optimized processor specific assembler code (e.g. for ARM, 386 and mips), so that it will compile with the same code on all Arduino environements.
 
 
 ## Decoding Example
@@ -13,6 +13,8 @@ I have forked the [fdk-aac](https://github.com/mstorsjo/fdk-aac/tree/v2.0.1) pro
 ```
 #include "AACDecoderFDK.h"
 #include "BabyElephantWalk60_aac.h"
+
+SET_LOOP_TASK_STACK_SIZE(50 * 1024);  
 
 using namespace aac_fdk;
 
@@ -121,7 +123,8 @@ This is just one of many __codecs__ that I have collected so far: Further detail
 
 On some processors we get compile errors because the arrays are too big: Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file. 
 
-The encoder is working on an ESP32 w/o PSRAM. The Decoder however needs PSRAM!
+The encoder is working on an ESP32 w/o PSRAM. The Decoder however needs PSRAM and
+a 50kbytes stack size!
 
 ## Copyright
 
