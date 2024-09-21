@@ -206,7 +206,7 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
       } else {
         ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
       }
-      LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%lu [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, (uint32_t)ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
+      LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%p [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
     } else {
       LOG_FDK(FDKInfo, "==> ps_calloc(%d, %d) -> 0x%p", n, size, ptr);
     }
