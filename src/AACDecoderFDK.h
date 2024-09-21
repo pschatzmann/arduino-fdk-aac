@@ -6,6 +6,8 @@
 #include "fdk_log.h"
 #include "libAACdec/aacdecoder_lib.h"
 
+#define FDK_OUT_BUFFER_DEFAULT_SIZE 1024*4
+
 namespace aac_fdk {
 
 typedef void (*AACInfoCallbackFDK)(CStreamInfo &info);
@@ -22,7 +24,7 @@ class AACDecoderFDK  {
 		 * 
 		 * @param output_buffer_size 
 		 */
-        AACDecoderFDK(int output_buffer_size=2048){
+        AACDecoderFDK(int output_buffer_size=FDK_OUT_BUFFER_DEFAULT_SIZE){
         	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
 		}
@@ -34,7 +36,7 @@ class AACDecoderFDK  {
 		 * @param infoCallback (default nullptr)
 		 * @param output_buffer_size (default 2048)
 		 */
-        AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=2048){
+        AACDecoderFDK(AACDataCallbackFDK dataCallback, AACInfoCallbackFDK infoCallback=nullptr, int output_buffer_size=FDK_OUT_BUFFER_DEFAULT_SIZE){
             this->output_buffer_size = output_buffer_size;
             setDataCallback(dataCallback);
             setInfoCallback(infoCallback);
@@ -48,7 +50,7 @@ class AACDecoderFDK  {
 		 * @param out_stream 
 		 * @param output_buffer_size 
 		 */
-        AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
+        AACDecoderFDK(Print &out_stream, int output_buffer_size=FDK_OUT_BUFFER_DEFAULT_SIZE){
         	LOG_FDK(FDKDebug,__FUNCTION__);
             this->output_buffer_size = output_buffer_size;
 			setOutput(out_stream);
@@ -106,7 +108,7 @@ class AACDecoderFDK  {
 		}
 
         // opens the decoder
-        bool begin(TRANSPORT_TYPE transportType=TT_MP4_ADTS, UINT nrOfLayers=1){
+        bool begin(TRANSPORT_TYPE transportType=TT_UNKNOWN, UINT nrOfLayers=1){
 			LOG_FDK(FDKDebug,__FUNCTION__);
 
 			// call aacDecoder_Open only once
@@ -225,7 +227,7 @@ class AACDecoderFDK  {
 						provideResult(output_buffer, output_buffer_size);
 					} else {
 						if (error != AAC_DEC_NOT_ENOUGH_BITS){
-							LOG_FDK(FDKError,"Decoding error: %d",error);
+							LOG_FDK(FDKError,"Decoding error: 0x%x",error);
 						}
 					}
 				}

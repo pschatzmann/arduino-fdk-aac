@@ -121,7 +121,7 @@ This is just one of many __codecs__ that I have collected so far: Further detail
 
 On some processors we get compile errors because the arrays are too big: Please uncomment the #define PIT_MAX_MAX line in the AACConstantsOverride.h file. 
 
-The encoder is working on an ESP32 w/o PSRAM. However, so far I did not manage to have the decoder working on microcontollers!
+The encoder is working on an ESP32 w/o PSRAM. The Decoder however needs PSRAM!
 
 ## Copyright
 
