@@ -6,7 +6,7 @@
 #include "fdk_log.h"
 #include "libAACdec/aacdecoder_lib.h"
 
-#define FDK_OUT_BUFFER_DEFAULT_SIZE 1024*2
+#define FDK_OUT_BUFFER_DEFAULT_SIZE 1024*4
 
 namespace aac_fdk {
 
