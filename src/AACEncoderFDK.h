@@ -264,7 +264,7 @@ public:
 		return aacEncoder_SetParam(handle, param, value);
 	}
 
-	operator boolean(){
+	operator bool(){
 		return active;
 	}
 

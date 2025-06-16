@@ -187,7 +187,7 @@ class AACDecoderFDK  {
         }
 
 	   /// returns true if the decoder is open
-       virtual operator boolean() {
+       virtual operator bool() {
 		   return is_open;
 	   }
 
