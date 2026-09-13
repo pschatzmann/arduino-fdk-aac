@@ -137,7 +137,6 @@ amm-info@iis.fraunhofer.de
 
 #ifdef ESP32
  #include "esp_heap_caps.h"
-  void *ps_calloc(size_t n, size_t size);
 #endif
 
 
@@ -198,17 +197,17 @@ char *FDKstrncpy(char *dest, const char *src, UINT n) {
 		LOG_FDK(FDKDebug,"FDKcallocExt(%d,%d,%d)", n, size, alignment);
     UCHAR alignment_effective = alignment;
 	  void *ptr = nullptr;
-    ptr = ps_calloc(n, size);
+    ptr = heap_caps_calloc(n, size, MALLOC_CAP_SPIRAM);
     if (ptr == nullptr){
       if (alignment%4 == 0){
         alignment_effective = 4;
-        ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT); 
+        ptr = heap_caps_calloc(n, size, MALLOC_CAP_32BIT);
       } else {
         ptr = heap_caps_calloc(n, size, MALLOC_CAP_8BIT);
       }
       LOG_FDK(FDKInfo, "==> calloc_align_%d(%d,%d) -> 0x%p [available MEMORY 8BIT : %d ; 32BIT : %d]", alignment_effective, n, size, ptr, heap_caps_get_free_size(MALLOC_CAP_8BIT), heap_caps_get_free_size(MALLOC_CAP_32BIT));
     } else {
-      LOG_FDK(FDKInfo, "==> ps_calloc(%d, %d) -> 0x%p", n, size, ptr);
+      LOG_FDK(FDKInfo, "==> heap_caps_calloc(%d, %d, MALLOC_CAP_SPIRAM) -> 0x%p", n, size, ptr);
     }
     if (ptr==nullptr) {
       LOG_FDK(FDKError, "Memory allocations error!!! -> largest free block [8BIT MEMORY: %d | 32BIT MEMORY: %d]", heap_caps_get_largest_free_block(MALLOC_CAP_8BIT), heap_caps_get_largest_free_block(MALLOC_CAP_32BIT));

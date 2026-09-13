@@ -5,10 +5,9 @@ if (DEFINED ESP_PLATFORM)
   idf_component_register(
     SRC_DIRS src src/libAACdec src/libFDK src/libSYS src/libArithCoding src/libMpegTPDec src/libSACdec src/libDRCdec src/libSBRdec src/libPCMutils
     INCLUDE_DIRS src src/libAACdec src/libFDK src/libSYS src/libArithCoding src/libMpegTPDec src/libSACdec src/libDRCdec src/libSBRdec src/libPCMutils
-    REQUIRES arduino-esp32
   )
 
-  target_compile_options(${COMPONENT_LIB} INTERFACE -Wno-error -Wno-format -Wno-format-security -Wformat=0)
+  target_compile_options(${COMPONENT_LIB} PUBLIC -Wno-error -Wno-format -Wno-format-security -Wformat=0)
   target_compile_options(${COMPONENT_LIB} PRIVATE -DUSE_DEFAULT_STDLIB)
   add_compile_definitions(ESP32)
 else()
