@@ -2,7 +2,7 @@
 # Arduino AAC Encoding and Decoding Library
 
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
-[![IDF Component](https://img.shields.io/badge/IDF-Component-blue.svg)](https://github.com/pschatzmann/arduino-fdk-aac)
+[![IDF Component](https://img.shields.io/badge/IDF-Component-blue.svg)](https://github.com/pschatzmann/codec-fdk-aac)
 [![CMake](https://img.shields.io/badge/CMake-Supported-blue.svg)](https://cmake.org/)
 
 I was looking for a way to encode sound PCM data to the AAC or MPEG data format on some Arduino Devices. That's when I found  the [Fraunhofer FDK AAC library](https://en.wikipedia.org/wiki/Fraunhofer_FDK_AAC). 
@@ -101,13 +101,13 @@ For Arduino, you can download the library as zip and call include Library -> zip
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone https://github.com/pschatzmann/arduino-fdk-aac.git
+git clone https://github.com/pschatzmann/codec-fdk-aac.git
 ```
 
 This project can also be built and executed on your desktop with cmake:
 
 ```
-cd arduino-fdk-aac
+cd codec-fdk-aac
 mkdir build
 cd build
 cmake ..
@@ -117,7 +117,7 @@ make
 
 ## Documentation
 
-- The [generated Class Documentation](https://pschatzmann.github.io/arduino-fdk-aac/html/annotated.html) can be found here.
+- The [generated Class Documentation](https://pschatzmann.github.io/codec-fdk-aac/html/annotated.html) can be found here.
 - I also suggest that you have a look at [my related Blog](https://www.pschatzmann.ch/home/2021/08/13/audio-decoders-for-microcontrollers/)
 
 I recommend to use this library together with my [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools). 
